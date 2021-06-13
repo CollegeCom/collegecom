@@ -1,7 +1,7 @@
 <html lang="en"><!--begin::Head--><head><base href="../../../../">
 		<meta charset="utf-8">
-		<title>Dashboard | Keenthemes</title>
-		<meta name="description" content="Recent news and updates">
+		<title>{% block title %}{% endblock title %}</title>
+		<meta name="description" content="College Community of Students and Faculties">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="canonical" href="https://keenthemes.com/metronic">
 		<!--begin::Fonts-->
@@ -795,7 +795,7 @@
 									<div class="topbar-item">
 										<div class="btn btn-icon btn-hover-transparent-white d-flex align-items-center btn-lg px-md-2 w-md-auto" id="kt_quick_user_toggle">
 											<span class="text-white opacity-70 font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-											<span class="text-white opacity-90 font-weight-bolder font-size-base d-none d-md-inline mr-4">Sean</span>
+											<span class="text-white opacity-90 font-weight-bolder font-size-base d-none d-md-inline mr-4">TRON</span>
 											<span class="symbol symbol-35">
 												<span class="symbol-label text-white font-size-h5 font-weight-bold bg-white-o-30">S</span>
 											</span>
@@ -823,29 +823,7 @@
 										<h2 class="text-white font-weight-bold my-2 mr-5">Dashboard</h2>
 										<!--end::Title-->
 										<!--begin::Breadcrumb-->
-										<div class="d-flex align-items-center font-weight-bold my-2">
-											<!--begin::Item-->
-											<a href="#" class="opacity-75 hover-opacity-100">
-												<i class="flaticon2-shelter text-white icon-1x"></i>
-											</a>
-											<!--end::Item-->
-											<!--begin::Item-->
-											<span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
-											<a href="" class="text-white text-hover-white opacity-75 hover-opacity-100">Apps</a>
-											<!--end::Item-->
-											<!--begin::Item-->
-											<span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
-											<a href="" class="text-white text-hover-white opacity-75 hover-opacity-100">Education</a>
-											<!--end::Item-->
-											<!--begin::Item-->
-											<span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
-											<a href="" class="text-white text-hover-white opacity-75 hover-opacity-100">School</a>
-											<!--end::Item-->
-											<!--begin::Item-->
-											<span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
-											<a href="" class="text-white text-hover-white opacity-75 hover-opacity-100">Dashboard</a>
-											<!--end::Item-->
-										</div>
+										{% block breadcrumb %}{% endblock breadcrumb %}
 										<!--end::Breadcrumb-->
 									</div>
 									<!--end::Heading-->
@@ -997,8 +975,8 @@
 						<i class="symbol-badge bg-success"></i>
 					</div>
 					<div class="d-flex flex-column">
-						<a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">James Jones</a>
-						<div class="text-muted mt-1">Application Developer</div>
+						<a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">Ajay Patel</a>
+						<div class="text-muted mt-1">Django Developer</div>
 						<div class="navi mt-2">
 							<a href="#" class="navi-item">
 								<span class="navi-link p-0 pb-2">
@@ -1015,7 +993,7 @@
 											<!--end::Svg Icon-->
 										</span>
 									</span>
-									<span class="navi-text text-muted text-hover-primary">jm@softplus.com</span>
+									<span class="navi-text text-muted text-hover-primary">ajaypatel@codeyaan.com</span>
 								</span>
 							</a>
 							<a href="#" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">Sign Out</a>
@@ -1029,7 +1007,7 @@
 				<!--begin::Nav-->
 				<div class="navi navi-spacer-x-0 p-0">
 					<!--begin::Item-->
-					<a href="custom/apps/user/profile-1/personal-information.html" class="navi-item">
+					<a href="/profile" class="navi-item">
 						<div class="navi-link">
 							<div class="symbol symbol-40 bg-light mr-3">
 								<div class="symbol-label">
@@ -1075,8 +1053,8 @@
 								</div>
 							</div>
 							<div class="navi-text">
-								<div class="font-weight-bold">My Messages</div>
-								<div class="text-muted">Inbox and tasks</div>
+								<div class="font-weight-bold">My Posts</div>
+								<div class="text-muted">Share your Moments</div>
 							</div>
 						</div>
 					</a>
@@ -1100,8 +1078,8 @@
 								</div>
 							</div>
 							<div class="navi-text">
-								<div class="font-weight-bold">My Activities</div>
-								<div class="text-muted">Logs and notifications</div>
+								<div class="font-weight-bold">My Feedbacks</div>
+								<div class="text-muted">Share Your Experience</div>
 							</div>
 						</div>
 					</a>
