@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('accounts.urls')),
     path('',include('feedback.urls')),
+    path('',include('comshop.urls')),
 ]
