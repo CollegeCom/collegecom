@@ -6,3 +6,7 @@ def addfeedback(request):
 
 def addcomplaint(request):
     return render(request,'feedback/addcomplaint.html')
+
+
+def complaints(request):
+    return render(request,'feedback/complaint-list.html')

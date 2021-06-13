@@ -23,4 +23,5 @@ urlpatterns = [
     path('',include('accounts.urls')),
     path('',include('feedback.urls')),
     path('',include('comshop.urls')),
+    path('',include('comchat.urls')),
 ]
