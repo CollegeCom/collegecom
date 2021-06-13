@@ -39,7 +39,7 @@
 														<i class="symbol-badge bg-success"></i>
 													</div>
 													<div>
-														<a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">James Jones</a>
+														<a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">{{request.user.first_name}} {{request.user.last_name}}</a>
 														<div class="text-muted">Application Developer</div>
 														<div class="mt-2">
 															<a href="#" class="btn btn-sm btn-primary font-weight-bold mr-2 py-2 px-3 px-xxl-5 my-1">Chat</a>
@@ -52,19 +52,19 @@
 												<div class="py-9">
 													<div class="d-flex align-items-center justify-content-between mb-2">
 														<span class="font-weight-bold mr-2">Email:</span>
-														<a href="#" class="text-muted text-hover-primary">matt@fifestudios.com</a>
+														<a href="#" class="text-muted text-hover-primary">{{request.user.email}}</a>
 													</div>
 													<div class="d-flex align-items-center justify-content-between mb-2">
 														<span class="font-weight-bold mr-2">Semester:</span>
-														<a href="#" class="text-muted text-hover-primary">6th</a>
+														<a href="#" class="text-muted text-hover-primary">{{euser.sem}}</a>
 													</div>
 													<div class="d-flex align-items-center justify-content-between mb-2">
 														<span class="font-weight-bold mr-2">Enroll No.:</span>
-														<a href="#" class="text-muted text-hover-primary">0818IT181510</a>
+														<a href="#" class="text-muted text-hover-primary">{{euser.enroll}}</a>
 													</div>
 													<div class="d-flex align-items-center justify-content-between">
 														<span class="font-weight-bold mr-2">Location:</span>
-														<span class="text-muted">Melbourne</span>
+														<span class="text-muted">{{euser.city}}</span>
 													</div>
 												</div>
 												<!--end::Contact-->
@@ -159,7 +159,7 @@
 													<div class="row">
 														<label class="col-xl-3"></label>
 														<div class="col-lg-9 col-xl-6">
-															<h5 class="font-weight-bold mb-6">Customer Info</h5>
+															<h5 class="font-weight-bold mb-6">Profile Info</h5>
 														</div>
 													</div>
 													<div class="form-group row">
@@ -185,19 +185,19 @@
 													<div class="form-group row">
 														<label class="col-xl-3 col-lg-3 col-form-label">First Name</label>
 														<div class="col-lg-9 col-xl-6">
-															<input class="form-control form-control-lg form-control-solid" type="text" value="Nick">
+															<input class="form-control form-control-lg form-control-solid" type="text" value="{{request.user.first_name}}">
 														</div>
 													</div>
 													<div class="form-group row">
 														<label class="col-xl-3 col-lg-3 col-form-label">Last Name</label>
 														<div class="col-lg-9 col-xl-6">
-															<input class="form-control form-control-lg form-control-solid" type="text" value="Bold">
+															<input class="form-control form-control-lg form-control-solid" type="text" value="{{request.user.last_name}}">
 														</div>
 													</div>
 													<div class="form-group row">
 														<label class="col-xl-3 col-lg-3 col-form-label">Institution Name</label>
 														<div class="col-lg-9 col-xl-6">
-															<input class="form-control form-control-lg form-control-solid" type="text" value="Loop Inc.">
+															<input class="form-control form-control-lg form-control-solid" type="text" value="{{euser.institution}}">
 														</div>
 													</div>
 													<div class="row">
@@ -216,7 +216,7 @@
 																		<i class="la la-at"></i>
 																	</span>
 																</div>
-																<input type="text" class="form-control form-control-lg form-control-solid" value="iist@iist.iist" placeholder="Email">
+																<input type="text" class="form-control form-control-lg form-control-solid" value="{{request.user.email}}" placeholder="Email">
 															
 
 															</div>
@@ -227,7 +227,7 @@
 														<label class="col-xl-3 col-lg-3 col-form-label">Linkedin Profile</label>
 														<div class="col-lg-9 col-xl-6">
 															<div class="input-group input-group-lg input-group-solid">
-																<input type="text" class="form-control form-control-lg form-control-solid" placeholder="Username" value="loop">
+																<input type="text" class="form-control form-control-lg form-control-solid" placeholder="Username" value="linked.in">
 															</div>
 														</div>
 													</div>

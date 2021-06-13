@@ -45,12 +45,12 @@
 							<!--begin::Signin-->
 							<div class="login-form login-signin py-11">
 								<!--begin::Form-->
-								<form class="form" novalidate="novalidate" id="kt_login_signin_form">
+								<form action="/login-user" method="post" class="form" novalidate="novalidate">{% csrf_token %}
 									<!--begin::Title-->
 									<div class="text-center pb-8">
 										<h2 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Sign In</h2>
 										<span class="text-muted font-weight-bold font-size-h4">Or
-										<a href="" class="text-primary font-weight-bolder" id="kt_login_signup">Create An Account</a></span>
+										<a onClick="signup()" class="text-primary font-weight-bolder" id="kt_login_signup">Create An Account</a></span>
 									</div>
 									<!--end::Title-->
 									<!--begin::Form group-->
@@ -70,7 +70,7 @@
 									<!--end::Form group-->
 									<!--begin::Action-->
 									<div class="text-center pt-2">
-										<button id="kt_login_signin_submit" class="btn btn-dark font-weight-bolder font-size-h6 px-8 py-4 my-3">Sign In</button>
+										<button type="submit" class="btn btn-dark font-weight-bolder font-size-h6 px-8 py-4 my-3">Sign In</button>
 									</div>
 									<!--end::Action-->
 								</form>

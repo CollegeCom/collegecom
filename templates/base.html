@@ -758,6 +758,22 @@
 												</a>
 												
 											</li>
+											<li class="menu-item menu-item-rel">
+												<a href="/shop" class="menu-link">
+													<span class="menu-text">Shop</span>
+													<span class="menu-desc"></span>
+													<i class="menu-arrow"></i>
+												</a>
+												
+											</li>
+											<li class="menu-item menu-item-rel">
+												<a href="/chat" class="menu-link">
+													<span class="menu-text">Chat</span>
+													<span class="menu-desc"></span>
+													<i class="menu-arrow"></i>
+												</a>
+												
+											</li>
 											
 											
 											
@@ -795,7 +811,7 @@
 									<div class="topbar-item">
 										<div class="btn btn-icon btn-hover-transparent-white d-flex align-items-center btn-lg px-md-2 w-md-auto" id="kt_quick_user_toggle">
 											<span class="text-white opacity-70 font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-											<span class="text-white opacity-90 font-weight-bolder font-size-base d-none d-md-inline mr-4">TRON</span>
+											<span class="text-white opacity-90 font-weight-bolder font-size-base d-none d-md-inline mr-4">{{request.user.first_name}}</span>
 											<span class="symbol symbol-35">
 												<span class="symbol-label text-white font-size-h5 font-weight-bold bg-white-o-30">S</span>
 											</span>
@@ -820,7 +836,7 @@
 									<!--begin::Heading-->
 									<div class="d-flex flex-column">
 										<!--begin::Title-->
-										<h2 class="text-white font-weight-bold my-2 mr-5">Dashboard</h2>
+										<h2 class="text-white font-weight-bold my-2 mr-5">{% block pagetitle %}{% endblock pagetitle %}</h2>
 										<!--end::Title-->
 										<!--begin::Breadcrumb-->
 										{% block breadcrumb %}{% endblock breadcrumb %}
@@ -959,8 +975,7 @@
 		<div id="kt_quick_user" class="offcanvas offcanvas-right p-10">
 			<!--begin::Header-->
 			<div class="offcanvas-header d-flex align-items-center justify-content-between pb-5" style="" kt-hidden-height="40">
-				<h3 class="font-weight-bold m-0">User Profile
-				<small class="text-muted font-size-sm ml-2">12 messages</small></h3>
+				<h3 class="font-weight-bold m-0">User Profile</h3>
 				<a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_user_close">
 					<i class="ki ki-close icon-xs text-muted"></i>
 				</a>
@@ -975,7 +990,7 @@
 						<i class="symbol-badge bg-success"></i>
 					</div>
 					<div class="d-flex flex-column">
-						<a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">Ajay Patel</a>
+						<a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">{{request.user.first_name}} {{request.user.last_name}}</a>
 						<div class="text-muted mt-1">Django Developer</div>
 						<div class="navi mt-2">
 							<a href="#" class="navi-item">
@@ -993,10 +1008,10 @@
 											<!--end::Svg Icon-->
 										</span>
 									</span>
-									<span class="navi-text text-muted text-hover-primary">ajaypatel@codeyaan.com</span>
+									<span class="navi-text text-muted text-hover-primary">{{request.user.email}}</span>
 								</span>
 							</a>
-							<a href="#" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">Sign Out</a>
+							<a href="/logout" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5">Sign Out</a>
 						</div>
 					</div>
 				</div>

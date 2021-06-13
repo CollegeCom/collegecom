@@ -2,6 +2,11 @@
 {% block title %}
   Add Complaint - CollegeCom
 {% endblock title %}
+{% block pagetitle %}
+  Add Complaint
+{% endblock pagetitle %}
+  
+
 {% block breadcrumb %}
 <div class="d-flex align-items-center font-weight-bold my-2">
 											<!--begin::Item-->
@@ -34,7 +39,7 @@
 										</div>
 									</div>
 									<!--begin::Form-->
-									<form class="form">
+									<form class="form" action="/adding-complaint" method="post">{% csrf_token %}
 										<div class="card-body">
 											<div class="row">
 												<div class="col-xl-3"></div>
@@ -42,33 +47,33 @@
 													<!--begin::Input-->
 													<div class="form-group">
 														<label>Name</label>
-														<input type="text" class="form-control form-control-solid form-control-lg" placeholder="Enter your name">
+														<input type="text" name="name" class="form-control form-control-solid form-control-lg" placeholder="Enter your name">
 													</div>
 													<!--end::Input-->
                                                     <!--begin::Input-->
 													<div class="form-group">
 														<label>Issue Title</label>
-														<input type="text" class="form-control form-control-solid form-control-lg" placeholder="Issue">
+														<input type="text" name="issue" class="form-control form-control-solid form-control-lg" placeholder="Issue">
 													</div>
 													<!--end::Input-->
 													<!--begin::Input-->
 													<div class="form-group">
 														<label>Issue Category</label>
 														<div></div>
-														<select class="custom-select form-control">
+														<select name="issuecat" class="custom-select form-control">
 															<option selected="selected">Open this select menu</option>
-															<option value="1">College</option>
-															<option value="2">With Student</option>
-															<option value="3">With Faculty</option>
-                                                            <option value="4">Sports</option>
-                                                            <option value="5">Canteen</option>
+															<option>College</option>
+															<option>With Student</option>
+															<option>With Faculty</option>
+                                                            <option>Sports</option>
+                                                            <option>Canteen</option>
 														</select>
 													</div>
 													<!--end::Input-->
 													<!--begin::Input-->
 													<div class="form-group">
 														<label for="exampleTextarea">Your Issue in Breif</label>
-														<textarea class="form-control form-control-solid form-control-lg" id="exampleTextarea" rows="3"></textarea>
+														<textarea name="issuedesc" class="form-control form-control-solid form-control-lg" id="exampleTextarea" rows="3"></textarea>
 														<span class="form-text text-muted">We'll never share your email with anyone else.</span>
 													</div>
 													<!--end::Input-->
@@ -81,7 +86,7 @@
 											<div class="row">
 												<div class="col-xl-3"></div>
 												<div class="col-xl-6">
-													<button type="reset" class="btn btn-primary font-weight-bold mr-2">Submit</button>
+													<button type="submit" class="btn btn-primary font-weight-bold mr-2">Submit</button>
 												</div>
 												<div class="col-xl-3"></div>
 											</div>

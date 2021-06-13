@@ -2,6 +2,11 @@
 {% block title %}
   Add Feedback - CollegeCom
 {% endblock title %}
+{% block pagetitle %}
+   Add Feedback
+{% endblock pagetitle %}
+   
+
 {% block breadcrumb %}
 <div class="d-flex align-items-center font-weight-bold my-2">
 											<!--begin::Item-->
@@ -28,14 +33,55 @@
 								</div>
 								<!--end::Section-->
 								<!--begin::Card-->
-								<div class="card card-custom gutter-b">
+								<div class="row">
+								 <div class="col-lg-4">
+								     <div class="card card-custom card-stretch gutter-b">
+											<!--begin::Header-->
+											<div class="card-header align-items-center border-0 mt-4">
+												<h3 class="card-title align-items-start flex-column">
+													<span class="font-weight-bolder text-dark">Recent Feedbacks</span>
+												</h3>
+											</div>
+											<!--end::Header-->
+											<!--begin::Body-->
+											<div class="card-body pt-4">
+												<!--begin::Timeline-->
+												{% for f in feedbacks %}
+												   <div class="timeline timeline-6 mt-3">
+													<!--begin::Item-->
+													<div class="timeline-item align-items-start">
+														<!--begin::Label-->
+														<div class="timeline-label font-weight-bolder text-dark-75 font-size-lg "></div>
+														<!--end::Label-->
+														<!--begin::Badge-->
+														<div class="timeline-badge">
+															<i class="fa fa-genderless text-primary icon-xl"></i>
+														</div>
+														<!--end::Badge-->
+														<!--begin::Text-->
+														<div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3">
+														   {{f.feedback}}
+														</div>
+														<!--end::Text-->
+													</div>
+													
+													<!--end::Item-->
+												</div>
+												{% endfor %}
+												<!--end::Timeline-->
+											</div>
+											<!--end: Card Body-->
+										</div>
+								   </div>
+								   <div class="col-lg-8">
+								   		<div class="card card-custom gutter-b">
 									<div class="card-header">
 										<div class="card-title">
 											<h5 class="card-label">Share Your Experience</h5>
 										</div>
 									</div>
 									<!--begin::Form-->
-									<form class="form">
+									<form class="form" action="/adding-feedback" method="post">{% csrf_token %}
 										<div class="card-body">
 											<div class="row">
 												<div class="col-xl-3"></div>
@@ -43,25 +89,25 @@
 													<!--begin::Input-->
 													<div class="form-group">
 														<label>Name</label>
-														<input type="text" class="form-control form-control-solid form-control-lg" placeholder="Enter your name">
+														<input type="text" name="name" class="form-control form-control-solid form-control-lg" placeholder="Enter your name">
 													</div>
 													<!--end::Input-->
 													<!--begin::Input-->
 													<div class="form-group">
 														<label>Select Event</label>
 														<div></div>
-														<select class="custom-select form-control">
-															<option selected="selected">Open this select menu</option>
-															<option value="1">Smart India Hackathon</option>
-															<option value="2">Designo</option>
-															<option value="3">Eyantra</option>
+														<select name="event" class="custom-select form-control">
+															<option  selected="selected">Open this select menu</option>
+															<option>Smart India Hackathon</option>
+															<option>Designo</option>
+															<option>Eyantra</option>
 														</select>
 													</div>
 													<!--end::Input-->
 													<!--begin::Input-->
 													<div class="form-group">
 														<label for="exampleTextarea">Your Feedback</label>
-														<textarea class="form-control form-control-solid form-control-lg" id="exampleTextarea" rows="3"></textarea>
+														<textarea name="feedback" class="form-control form-control-solid form-control-lg" id="exampleTextarea" rows="3"></textarea>
 														<span class="form-text text-muted">We'll never share your email with anyone else.</span>
 													</div>
 													<!--end::Input-->
@@ -74,7 +120,7 @@
 											<div class="row">
 												<div class="col-xl-3"></div>
 												<div class="col-xl-6">
-													<button type="reset" class="btn btn-primary font-weight-bold mr-2">Submit</button>
+													<button type="submit" class="btn btn-primary font-weight-bold mr-2">Submit</button>
 												</div>
 												<div class="col-xl-3"></div>
 											</div>
@@ -82,6 +128,8 @@
 										<!--end::Actions-->
 									</form>
 									<!--end::Form-->
+								</div>
+								   </div>
 								</div>
 								<!--end::Card-->
 							</div>
