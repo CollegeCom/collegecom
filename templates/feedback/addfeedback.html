@@ -35,44 +35,47 @@
 								<!--begin::Card-->
 								<div class="row">
 								 <div class="col-lg-4">
-								     <div class="card card-custom card-stretch gutter-b">
+										<!--begin::List Widget 8-->
+										<div class="card card-custom card-stretch gutter-b">
 											<!--begin::Header-->
-											<div class="card-header align-items-center border-0 mt-4">
-												<h3 class="card-title align-items-start flex-column">
-													<span class="font-weight-bolder text-dark">Recent Feedbacks</span>
-												</h3>
+											<div class="card-header border-0">
+												<h3 class="card-title font-weight-bolder text-dark">Recent Feedbacks</h3>
 											</div>
 											<!--end::Header-->
 											<!--begin::Body-->
-											<div class="card-body pt-4">
-												<!--begin::Timeline-->
-												{% for f in feedbacks %}
-												   <div class="timeline timeline-6 mt-3">
-													<!--begin::Item-->
-													<div class="timeline-item align-items-start">
-														<!--begin::Label-->
-														<div class="timeline-label font-weight-bolder text-dark-75 font-size-lg "></div>
-														<!--end::Label-->
-														<!--begin::Badge-->
-														<div class="timeline-badge">
-															<i class="fa fa-genderless text-primary icon-xl"></i>
+											<div class="card-body pt-0">
+											{% for f in feedbacks  %}
+												<!--begin::Item-->
+												<div class="mb-10">
+													<!--begin::Section-->
+													<div class="d-flex align-items-center">
+														<!--begin::Symbol-->
+														<div class="symbol symbol-45 symbol-light mr-5">
+															<span class="symbol-label">
+																<img src="/static/media/svg/misc/006-plurk.svg" class="h-50 align-self-center" alt="">
+															</span>
 														</div>
-														<!--end::Badge-->
+														<!--end::Symbol-->
 														<!--begin::Text-->
-														<div class="font-weight-mormal font-size-lg timeline-content text-muted pl-3">
-														   {{f.feedback}}
+														<div class="d-flex flex-column flex-grow-1">
+															<a href="#" class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1">{{f.postedby}}</a>
+															<span class="text-muted font-weight-bold">{{f.event}}</span>
 														</div>
 														<!--end::Text-->
 													</div>
-													
-													<!--end::Item-->
+													<!--end::Section-->
+													<!--begin::Desc-->
+													<p class="text-dark-50 m-0 pt-5 font-weight-normal">{{f.feedback}}</p>
+													<!--end::Desc-->
 												</div>
+												<!--end::Item-->
 												{% endfor %}
-												<!--end::Timeline-->
 											</div>
-											<!--end: Card Body-->
+											<!--end::Body-->
 										</div>
-								   </div>
+										<!--end: Card-->
+										<!--end::List Widget 8-->
+									</div>
 								   <div class="col-lg-8">
 								   		<div class="card card-custom gutter-b">
 									<div class="card-header">

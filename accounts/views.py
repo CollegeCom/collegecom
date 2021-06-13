@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login as authlogin, logout
 from django.shortcuts import redirect
 from accounts.models import extUser
 from django.contrib.auth.decorators import login_required
-
+from django.http import HttpResponse
 
 # Create your views here.
 def login(request):
@@ -16,22 +16,56 @@ def profile(request):
     parmas = {'euser':exuser}
     return render(request,'accounts/profile.html',parmas)
 
+def reg_user(request):
+    if request.method == "POST":
+        first_name = request.POST['first_name']
+        last_name=request.POST['last_name']
+        email = request.POST['email']
+        username = email.split('@')[0]
+
+        username.lower()
+        email.lower()
+        password = request.POST['password']
+        if User.objects.filter(username=username).exists():
+            success=2
+            return HttpResponse(success)
+        elif User.objects.filter(email=email).exists():
+            success=2
+            return HttpResponse(success)
+        else:
+            if (email.split('@')[1]!='indoreinstitute.com'):
+                success=3
+                return HttpResponse(success)
+            else:
+                newuser = User.objects.create_user(username,email,password)
+                newuser.first_name=first_name
+                newuser.last_name=last_name
+                newuser.is_active=True
+                newuser.save()
+                extuser = extUser(user=newuser)
+                extuser.save()
+                success=1
+                return HttpResponse(success)
+
 def loginuser(request):
     if request.method=="POST":
         username = request.POST['username']
         password = request.POST['password']
         if User.objects.filter(username=username).exists():
-            us = User.objects.get(username=username)
             user = authenticate(username=username,password=password)
             if user is not None:
                 authlogin(request,user)
-                return redirect('/')
+                success=1
+                return HttpResponse(success)
             else:
-                return redirect('login')
+                success=2
+                return HttpResponse(success)
         else:
-            return redirect('login')
+            success=3
+            return HttpResponse(success)
     else:
         return redirect('/')
+    
 
 def log_out(request):
     logout(request)

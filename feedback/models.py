@@ -9,6 +9,7 @@ class Complaint(models.Model):
     useremail=models.CharField(max_length=80)
     issuecat=models.CharField(max_length=20)
     issuedesc=models.TextField()
+    status=models.IntegerField(default=0,blank=True)
 
 class Feedback(models.Model):
     name=models.CharField(max_length=50)

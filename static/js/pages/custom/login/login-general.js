@@ -54,17 +54,48 @@ var KTLogin = function() {
 
             validation.validate().then(function(status) {
 		        if (status == 'Valid') {
-                    swal.fire({
-		                text: "All is cool! Now you submit this form",
-		                icon: "success",
-		                buttonsStyling: false,
-		                confirmButtonText: "Ok, got it!",
-                        customClass: {
-    						confirmButton: "btn font-weight-bold btn-light-primary"
-    					}
-		            }).then(function() {
-						KTUtil.scrollTop();
+					$.ajax({
+						type: "POST",
+						url: "/login-user",
+						data:{
+							username:$('#login-username').val(),
+							password:$('#login-password').val(),          
+							csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+						},
+						success: function (data){
+							if(data==2){
+								swal.fire({
+									text: "Wrong Username/Password",
+									icon: "error",
+									buttonsStyling: false,
+									confirmButtonText: "Try again !",
+									customClass: {
+										confirmButton: "btn font-weight-bold btn-light-primary"
+									}
+								}).then(function() {
+									KTUtil.scrollTop();
+								});
+							}
+							else if (data==1){
+							window.location="/";
+							}
+							else if (data==3){
+								swal.fire({
+									text: "User Not Registered",
+									icon: "error",
+									buttonsStyling: false,
+									confirmButtonText: "Register!",
+									customClass: {
+										confirmButton: "btn font-weight-bold btn-light-primary"
+									}
+								}).then(function() {
+									KTUtil.scrollTop();
+									
+								});
+							}
+						}     
 					});
+	  
 				} else {
 					swal.fire({
 		                text: "Sorry, looks like there are some errors detected, please try again.",
@@ -160,16 +191,54 @@ var KTLogin = function() {
 
             validation.validate().then(function(status) {
 		        if (status == 'Valid') {
-                    swal.fire({
-		                text: "All is cool! Now you submit this form",
-		                icon: "success",
-		                buttonsStyling: false,
-		                confirmButtonText: "Ok, got it!",
-                        customClass: {
-    						confirmButton: "btn font-weight-bold btn-light-primary"
-    					}
-		            }).then(function() {
-						KTUtil.scrollTop();
+					$.ajax({
+						type: "POST",
+						url: "/register-user",
+						data:{
+							first_name:$('#firstname').val(),
+							last_name:$('#lastname').val(),
+							email:$('#email').val(),
+							password:$('#password').val(),          
+							csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+						},
+						success: function (data){
+							if (data==1){
+								swal.fire({
+								text: "Account Created Successfully , Kindly Login",
+								icon: "success",
+							}).then(function() {
+								KTUtil.scrollTop();
+							});
+							}
+							else if (data==2){
+								swal.fire({
+									text: "Sorry, looks like email already registered",
+									icon: "error",
+									buttonsStyling: false,
+									confirmButtonText: "Try Again !",
+									customClass: {
+										confirmButton: "btn font-weight-bold btn-light-primary"
+									}
+								}).then(function() {
+									KTUtil.scrollTop();
+								});
+							}
+							else if (data==3){
+								swal.fire({
+									text: "Invalid Email, Enter Intsitute Mail Id.",
+									icon: "error",
+									buttonsStyling: false,
+									confirmButtonText: "Try Again !",
+									customClass: {
+										confirmButton: "btn font-weight-bold btn-light-primary"
+									}
+								}).then(function() {
+									KTUtil.scrollTop();
+								});
+							}
+							
+							
+						}     
 					});
 				} else {
 					swal.fire({
@@ -190,7 +259,6 @@ var KTLogin = function() {
         // Handle cancel button
         $('#kt_login_signup_cancel').on('click', function (e) {
             e.preventDefault();
-
             _showForm('signin');
         });
     }

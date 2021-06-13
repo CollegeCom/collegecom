@@ -1,3 +1,4 @@
+from django.http.response import HttpResponse
 import feedback
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
@@ -15,8 +16,9 @@ def addcomplaint(request):
 
 
 def complaints(request):
-    complaints = Complaint.objects.all()
+    complaints = Complaint.objects.filter(status=1)
     params = {'complaints':complaints}
+
     return render(request,'feedback/complaint-list.html',params)
 
 def addingcomplaint(request):
@@ -58,3 +60,20 @@ def addingfeedback(request):
         fb.postedby=postedby
         fb.save()
         return redirect('/')
+
+def complaint_status(request):
+    if request.method=="POST":
+        comid=request.POST['comid']
+        status=int(request.POST['status'])
+        if Complaint.objects.filter(id=comid).exists():
+            coms=Complaint.objects.get(id=comid)
+            if status==1:
+                coms.status=1
+                coms.save()
+                success=1
+                return HttpResponse(success)
+            else:
+                success=2
+                return HttpResponse(success)
+
+            

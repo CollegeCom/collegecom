@@ -676,7 +676,10 @@
 .contract-trigger:before {
   width: 200%;
   height: 200%;
-}</style></head>
+}</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
 	<!--end::Head-->
 	<!--begin::Body-->
 	<body id="kt_body" style="background-image: url(/static/media/bg/homebg.jpg)" class="quick-panel-right demo-panel-right offcanvas-right header-fixed subheader-enabled">
@@ -812,9 +815,7 @@
 										<div class="btn btn-icon btn-hover-transparent-white d-flex align-items-center btn-lg px-md-2 w-md-auto" id="kt_quick_user_toggle">
 											<span class="text-white opacity-70 font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
 											<span class="text-white opacity-90 font-weight-bolder font-size-base d-none d-md-inline mr-4">{{request.user.first_name}}</span>
-											<span class="symbol symbol-35">
-												<span class="symbol-label text-white font-size-h5 font-weight-bold bg-white-o-30">S</span>
-											</span>
+											
 										</div>
 									</div>
 									<!--end::Toggle-->
@@ -845,7 +846,7 @@
 									<!--end::Heading-->
 								</div>
 								<!--end::Info-->
-								<!--begin::Toolbar-->
+								{% comment %} <!--begin::Toolbar-->
 								<div class="d-flex align-items-center">
 									<!--begin::Button-->
 									<a href="#" class="btn btn-transparent-white font-weight-bold py-3 px-6 mr-2">Reports</a>
@@ -925,7 +926,7 @@
 									</div>
 									<!--end::Dropdown-->
 								</div>
-								<!--end::Toolbar-->
+								<!--end::Toolbar--> {% endcomment %}
 							</div>
 						</div>
 						<!--end::Subheader-->
@@ -2252,6 +2253,7 @@
 		<script src="/static/js/pages/widgets.js"></script>
 			<script src="assets/js/pages/custom/chat/chat.js"></script>
 		<!--end::Page Scripts-->
-	
+{% block script %}
+{% endblock script %}
 	<!--end::Body-->
 <svg id="SvgjsSvg1001" width="2" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0;"><defs id="SvgjsDefs1002"></defs><polyline id="SvgjsPolyline1003" points="0,0"></polyline><path id="SvgjsPath1004" d="M0 0 "></path></svg><iframe src="chrome-extension://kbbdabhdfibnancpjfhlkhafgdilcnji/./html/sources.html" allow="camera" style="display: none;"></iframe><iframe src="chrome-extension://kbbdabhdfibnancpjfhlkhafgdilcnji/./html/audiosources.html" allow="microphone" style="display: none;"></iframe></body></html>
