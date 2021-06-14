@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     'accounts',
     'feedback',
     'comshop',
-    'comchat',
     'events',
+    'chat',
 ]
 
 MIDDLEWARE = [
