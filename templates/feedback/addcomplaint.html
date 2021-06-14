@@ -27,7 +27,7 @@
 							<!--begin::Container-->
 							<div class="container">
 								<!--begin::Section-->
-								<div class="text-center pt-15">
+								<div class="text-center">
 									<h1 class="h2 font-weight-bolder text-white mb-6">Raise an Issue</h1>
 								</div>
 								<!--end::Section-->
@@ -39,7 +39,7 @@
 										</div>
 									</div>
 									<!--begin::Form-->
-									<form class="form" action="/adding-complaint" method="post">{% csrf_token %}
+									<form class="form">{% csrf_token %}
 										<div class="card-body">
 											<div class="row">
 												<div class="col-xl-3"></div>
@@ -47,33 +47,34 @@
 													<!--begin::Input-->
 													<div class="form-group">
 														<label>Name</label>
-														<input type="text" name="name" class="form-control form-control-solid form-control-lg" placeholder="Enter your name">
+														<input type="text" id="name" name="name" class="form-control form-control-solid form-control-lg" placeholder="Enter your name">
 													</div>
 													<!--end::Input-->
                                                     <!--begin::Input-->
 													<div class="form-group">
 														<label>Issue Title</label>
-														<input type="text" name="issue" class="form-control form-control-solid form-control-lg" placeholder="Issue">
+														<input type="text" id="issue" name="issue" class="form-control form-control-solid form-control-lg" placeholder="Issue">
 													</div>
 													<!--end::Input-->
 													<!--begin::Input-->
 													<div class="form-group">
 														<label>Issue Category</label>
 														<div></div>
-														<select name="issuecat" class="custom-select form-control">
-															<option selected="selected">Open this select menu</option>
-															<option>College</option>
-															<option>With Student</option>
-															<option>With Faculty</option>
-                                                            <option>Sports</option>
-                                                            <option>Canteen</option>
-														</select>
+														<select class="form-control" id="issuecat" name="issuecat">
+																<optgroup label="Issue Category">
+																	<option>College</option>
+																	<option>Faculty</option>
+																	<option>Student</option>
+																	<option>Sports</option>
+																	<option>Canteen</option>
+																</optgroup>
+															</select>
 													</div>
 													<!--end::Input-->
 													<!--begin::Input-->
 													<div class="form-group">
 														<label for="exampleTextarea">Your Issue in Breif</label>
-														<textarea name="issuedesc" class="form-control form-control-solid form-control-lg" id="exampleTextarea" rows="3"></textarea>
+														<textarea name="issuedesc" id="issuedesc" class="form-control form-control-solid form-control-lg" id="exampleTextarea" rows="3"></textarea>
 														<span class="form-text text-muted">We'll never share your email with anyone else.</span>
 													</div>
 													<!--end::Input-->
@@ -81,19 +82,20 @@
 												<div class="col-xl-3"></div>
 											</div>
 										</div>
-										<!--begin::Actions-->
+									</form>
+									
+									<!--end::Form-->
+									<!--begin::Actions-->
 										<div class="card-footer">
 											<div class="row">
 												<div class="col-xl-3"></div>
 												<div class="col-xl-6">
-													<button type="submit" class="btn btn-primary font-weight-bold mr-2">Submit</button>
+													<button onclick="addcomplaint()" class="btn btn-primary font-weight-bold mr-2">Submit</button>
 												</div>
 												<div class="col-xl-3"></div>
 											</div>
 										</div>
 										<!--end::Actions-->
-									</form>
-									<!--end::Form-->
 								</div>
 								<!--end::Card-->
 							</div>
@@ -102,4 +104,34 @@
 						<!--end::Entry-->
 					</div>
 {% endblock begincontent %}
+{% block script %}
+   <script>
+  function addcomplaint(){
+	  $.ajax({
+			type: "POST",
+			url: "/adding-complaint",
+			data:{
+				name:$('#name').val(),
+				issue:$('#issue').val(),
+				issuecat:$('#issuecat').val(),
+				issuedesc:$('#issuedesc').val(),
+				csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+			}, success: function (data){
+				if (data==1){
+					toastr.success("Complaint Raised Successfully");
+				}
+			}
+	  });
+  }
+</script>
+<script>
+  $('#issuecat').selectpicker();
+$('#issuecat').on('changed.bs.select', function() {
+ // Revalidate field
+ validator.revalidateField('select');
+});
+</script>
+{% endblock script %}
+   
+
    

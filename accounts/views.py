@@ -8,7 +8,10 @@ from django.http import HttpResponse
 
 # Create your views here.
 def login(request):
-    return render(request,'accounts/login.html')
+    if request.user.is_authenticated:
+        return redirect('/')
+    else:
+        return render(request,'accounts/login.html')
 
 @login_required(login_url='login')
 def profile(request):
@@ -70,3 +73,28 @@ def loginuser(request):
 def log_out(request):
     logout(request)
     return redirect('login')
+
+def updateprofile(request):
+    if request.method=="POST":
+        firstname=request.POST['firstname']
+        lastname=request.POST['lastname']
+        institution=request.POST['institution']
+        cemail=request.POST['cemail']
+        linkedin=request.POST['linkedin']
+        enroll=request.POST['enroll']
+        sem=request.POST['sem']
+        city=request.POST['location']
+        user=User.objects.get(id=request.user.id)
+        user.first_name=firstname
+        user.last_name=lastname
+        user.save()
+        up=extUser.objects.get(user__id=request.user.id)
+        up.institution=institution
+        up.cemail=cemail
+        up.enroll=enroll
+        up.linkedin=linkedin
+        up.sem=sem
+        up.city=city
+        up.save()
+        success=1
+        return HttpResponse(success)

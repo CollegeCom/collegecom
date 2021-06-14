@@ -28,7 +28,7 @@
 							<!--begin::Container-->
 							<div class="container">
 								<!--begin::Section-->
-								<div class="text-center pt-15">
+								<div class="text-center">
 									<h1 class="h2 font-weight-bolder text-white mb-6">Share Your Experience</h1>
 								</div>
 								<!--end::Section-->
@@ -58,7 +58,7 @@
 														<!--end::Symbol-->
 														<!--begin::Text-->
 														<div class="d-flex flex-column flex-grow-1">
-															<a href="#" class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1">{{f.postedby}}</a>
+															<a href="#" class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1">{{f.name}}</a>
 															<span class="text-muted font-weight-bold">{{f.event}}</span>
 														</div>
 														<!--end::Text-->
@@ -84,7 +84,7 @@
 										</div>
 									</div>
 									<!--begin::Form-->
-									<form class="form" action="/adding-feedback" method="post">{% csrf_token %}
+									<form class="form">{% csrf_token %}
 										<div class="card-body">
 											<div class="row">
 												<div class="col-xl-3"></div>
@@ -92,25 +92,28 @@
 													<!--begin::Input-->
 													<div class="form-group">
 														<label>Name</label>
-														<input type="text" name="name" class="form-control form-control-solid form-control-lg" placeholder="Enter your name">
+														<input type="text" id="name" name="name" class="form-control form-control-solid form-control-lg" placeholder="Enter your name">
 													</div>
 													<!--end::Input-->
 													<!--begin::Input-->
 													<div class="form-group">
 														<label>Select Event</label>
 														<div></div>
-														<select name="event" class="custom-select form-control">
-															<option  selected="selected">Open this select menu</option>
-															<option>Smart India Hackathon</option>
-															<option>Designo</option>
-															<option>Eyantra</option>
-														</select>
+														<select class="form-control" id="kt_bootstrap_select" name="event">
+																<optgroup label="Event" id="event">
+																	<option>Smart India Hackathon</option>
+																	<option>Designo</option>
+																	<option>Eyantra</option>
+																	<option>Abhigyata Parv</option>
+																	<option>Sports Competetion</option>
+																</optgroup>
+															</select>
 													</div>
 													<!--end::Input-->
 													<!--begin::Input-->
 													<div class="form-group">
 														<label for="exampleTextarea">Your Feedback</label>
-														<textarea name="feedback" class="form-control form-control-solid form-control-lg" id="exampleTextarea" rows="3"></textarea>
+														<textarea name="feedback" id="feedback" class="form-control form-control-solid form-control-lg" id="exampleTextarea" rows="3"></textarea>
 														<span class="form-text text-muted">We'll never share your email with anyone else.</span>
 													</div>
 													<!--end::Input-->
@@ -118,18 +121,18 @@
 												<div class="col-xl-3"></div>
 											</div>
 										</div>
-										<!--begin::Actions-->
+									</form>
+									<!--begin::Actions-->
 										<div class="card-footer">
 											<div class="row">
 												<div class="col-xl-3"></div>
 												<div class="col-xl-6">
-													<button type="submit" class="btn btn-primary font-weight-bold mr-2">Submit</button>
+													<button onclick="addfeedback()" class="btn btn-primary font-weight-bold mr-2">Submit</button>
 												</div>
 												<div class="col-xl-3"></div>
 											</div>
 										</div>
 										<!--end::Actions-->
-									</form>
 									<!--end::Form-->
 								</div>
 								   </div>
@@ -141,4 +144,33 @@
 						<!--end::Entry-->
 					</div>
 {% endblock begincontent %}
-   
+   {% block script %}
+       <script>
+	   function addfeedback(){
+	  $.ajax({
+			type: "POST",
+			url: "/adding-feedback",
+			data:{
+				name:$('#name').val(),
+				event:$('#kt_bootstrap_select').val(),
+				feedback:$('#feedback').val(),
+				csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+			}, success: function (data){
+				if (data==1){
+					toastr.success("Feedback Added Successfully");
+				}
+			}
+	  });
+  }
+</script>
+<script>
+   $('#kt_bootstrap_select').selectpicker();
+$('#kt_bootstrap_select').on('changed.bs.select', function() {
+ // Revalidate field
+ validator.revalidateField('select');
+});
+
+</script>
+   {% endblock script %}
+  
+

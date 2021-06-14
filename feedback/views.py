@@ -4,23 +4,30 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from accounts.models import extUser
 from feedback.models import Complaint, Feedback
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required(login_url='login')
 def addfeedback(request):
     feedbacks = Feedback.objects.all()
     params = {'feedbacks':feedbacks}
     return render(request,'feedback/addfeedback.html',params)
 
+@login_required(login_url='login')
 def addcomplaint(request):
     return render(request,'feedback/addcomplaint.html')
 
 
+@login_required(login_url='login')
 def complaints(request):
-    complaints = Complaint.objects.filter(status=1)
-    params = {'complaints':complaints}
+    pcomplaints = Complaint.objects.filter(status=0)
+    scomplaints = Complaint.objects.filter(status=1)
+    rcomplaints = Complaint.objects.filter(status=2)
+    params = {'pcomplaints':pcomplaints,'scomplaints':scomplaints,'rcomplaints':rcomplaints}
 
     return render(request,'feedback/complaint-list.html',params)
 
+@login_required(login_url='login')
 def addingcomplaint(request):
     if request.method=="POST":
         name=request.POST['name']
@@ -40,8 +47,10 @@ def addingcomplaint(request):
         com.useremail=useremail
         com.postedby=postedby
         com.save()
-        return redirect('/')
-    
+        success=1
+        return HttpResponse(success)
+
+@login_required(login_url='login')   
 def addingfeedback(request):
     if request.method=="POST":
         name=request.POST['name']
@@ -59,8 +68,10 @@ def addingfeedback(request):
         fb.useremail=useremail
         fb.postedby=postedby
         fb.save()
-        return redirect('/')
+        success=1   
+        return HttpResponse(success)
 
+@login_required(login_url='login')
 def complaint_status(request):
     if request.method=="POST":
         comid=request.POST['comid']
@@ -72,8 +83,11 @@ def complaint_status(request):
                 coms.save()
                 success=1
                 return HttpResponse(success)
-            else:
+            elif status==2:
+                coms.status=2
+                coms.save()
                 success=2
                 return HttpResponse(success)
+                
 
             

@@ -147,13 +147,13 @@
 													<span class="text-muted font-weight-bold font-size-sm mt-1">Update your personal informaiton</span>
 												</div>
 												<div class="card-toolbar">
-													<button type="reset" class="btn btn-success mr-2">Save Changes</button>
+													<button onclick="updateprofile()" class="btn btn-success mr-2">Save Changes</button>
 													<button type="reset" class="btn btn-secondary">Cancel</button>
 												</div>
 											</div>
 											<!--end::Header-->
 											<!--begin::Form-->
-											<form class="form">
+											<form class="form">{% csrf_token %}
 												<!--begin::Body-->
 												<div class="card-body">
 													<div class="row">
@@ -185,25 +185,54 @@
 													<div class="form-group row">
 														<label class="col-xl-3 col-lg-3 col-form-label">First Name</label>
 														<div class="col-lg-9 col-xl-6">
-															<input class="form-control form-control-lg form-control-solid" type="text" value="{{request.user.first_name}}">
+															<input class="form-control form-control-lg form-control-solid" id="firstname" type="text" value="{{request.user.first_name}}">
 														</div>
 													</div>
 													<div class="form-group row">
 														<label class="col-xl-3 col-lg-3 col-form-label">Last Name</label>
 														<div class="col-lg-9 col-xl-6">
-															<input class="form-control form-control-lg form-control-solid" type="text" value="{{request.user.last_name}}">
+															<input class="form-control form-control-lg form-control-solid" id="lastname" type="text" value="{{request.user.last_name}}">
 														</div>
 													</div>
 													<div class="form-group row">
 														<label class="col-xl-3 col-lg-3 col-form-label">Institution Name</label>
 														<div class="col-lg-9 col-xl-6">
-															<input class="form-control form-control-lg form-control-solid" type="text" value="{{euser.institution}}">
+															<input class="form-control form-control-lg form-control-solid" id="institution" type="text" {% if euser.institution is not None %}value="{{euser.institution}}"{% endif %}>
+														</div>
+													</div>
+													<div class="form-group row">
+														<label class="col-xl-3 col-lg-3 col-form-label">Enrollment Number</label>
+														<div class="col-lg-9 col-xl-6">
+															<input class="form-control form-control-lg form-control-solid" id="enroll" type="text" {% if euser.institution is not None %}value="{{euser.enroll}}"{% endif %}>
+														</div>
+													</div>
+													<div class="form-group row">
+														<label class="col-xl-3 col-lg-3 col-form-label">City</label>
+														<div class="col-lg-9 col-xl-6">
+															<input class="form-control form-control-lg form-control-solid" id="location" type="text" {% if euser.institution is not None %}value="{{euser.city}}"{% endif %}>
+														</div>
+													</div>
+													<div class="form-group row">
+														<label class="col-xl-3 col-lg-3 col-form-label">Select Semester</label>
+														<div class="col-lg-4 col-md-9 col-sm-12">
+															<select class="form-control" id="kt_bootstrap_select" name="select">
+																<optgroup label="semester" id="semester">
+																	<option>First</option>
+																	<option>Second</option>
+																	<option>Third</option>
+																	<option>Fourth</option>
+																	<option>Fifth</option>
+																	<option>Sixth</option>
+																	<option>Seventh</option>
+																	<option>Eighth</option>
+																</optgroup>
+															</select>
 														</div>
 													</div>
 													<div class="row">
 														<label class="col-xl-3"></label>
 														<div class="col-lg-9 col-xl-6">
-															<h5 class="font-weight-bold mt-10 mb-6">Contact Info</h5>
+															<h5 class="font-weight-bold mt-10 mb-6" >Contact Info</h5>
 														</div>
 													</div>
 													
@@ -216,7 +245,7 @@
 																		<i class="la la-at"></i>
 																	</span>
 																</div>
-																<input type="text" class="form-control form-control-lg form-control-solid" value="{{request.user.email}}" placeholder="Email">
+																<input id="cemail" type="text" class="form-control form-control-lg form-control-solid" {% if euser.institution is not None %}value="{{euser.cemail}}"{% endif %} placeholder="Email">
 															
 
 															</div>
@@ -227,7 +256,7 @@
 														<label class="col-xl-3 col-lg-3 col-form-label">Linkedin Profile</label>
 														<div class="col-lg-9 col-xl-6">
 															<div class="input-group input-group-lg input-group-solid">
-																<input type="text" class="form-control form-control-lg form-control-solid" placeholder="Username" value="linked.in">
+																<input id="linkedin" type="text" class="form-control form-control-lg form-control-solid" placeholder="Username" {% if euser.institution is not None %}value="{{euser.linkedin}}"{% endif %}>
 															</div>
 														</div>
 													</div>
@@ -246,3 +275,38 @@
 						<!--end::Entry-->
 					</div>
 {% endblock begincontent %}
+{% block script %}
+
+<script>
+  function updateprofile(){
+	  $.ajax({
+			type: "POST",
+			url: "/update-profile",
+			data:{
+				firstname:$('#firstname').val(),
+				lastname:$('#lastname').val(),
+				institution:$('#institution').val(),
+				cemail:$('#cemail').val(),
+				linkedin:$('#linkedin').val(),   
+				enroll:$('#enroll').val(), 
+				location:$('#location').val(), 
+				sem:$('#semester').val(),        
+				csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+			}, success: function (data){
+				if (data==1){
+					toastr.success("Profile Updated Successfully");
+				}
+			}
+	  });
+  }
+</script>
+<script>
+  $('#kt_bootstrap_select').selectpicker();
+$('#kt_bootstrap_select').on('changed.bs.select', function() {
+ // Revalidate field
+ validator.revalidateField('select');
+});
+</script>
+  
+{% endblock script %}
+  
