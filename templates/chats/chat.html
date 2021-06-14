@@ -30,6 +30,7 @@
 				<!--end:Search-->
 				<!--begin:Users-->
 				<div class="mt-7 scroll scroll-pull ps ps--active-y" style="height: 512px; overflow: hidden;">
+					{% for u in users %}
 					<!--begin:User-->
 					<div class="d-flex align-items-center justify-content-between mb-5">
 						<div class="d-flex align-items-center">
@@ -37,33 +38,17 @@
 								<img alt="Pic" src="/static/media/users/300_12.jpg">
 							</div>
 							<div class="d-flex flex-column">
-								<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-lg">Matt Pears</a>
-								<span class="text-muted font-weight-bold font-size-sm">Head of Development</span>
+								<a href="/chat/{{u.username}}" class="text-dark-75 text-hover-primary font-weight-bold font-size-lg">{{u.first_name}} {{u.last_name}}</a>
+								{% comment %} <span class="text-muted font-weight-bold font-size-sm">Head of Development</span> {% endcomment %}
 							</div>
 						</div>
 						<div class="d-flex flex-column align-items-end">
-							<span class="text-muted font-weight-bold font-size-sm">35 mins</span>
+							{% comment %} <span class="text-muted font-weight-bold font-size-sm">35 mins</span> {% endcomment %}
 						</div>
 					</div>
-					<!--end:User-->
-					<!--begin:User-->
-					<div class="d-flex align-items-center justify-content-between mb-5">
-						<div class="d-flex align-items-center">
-							<div class="symbol symbol-circle symbol-50 mr-3">
-								<img alt="Pic" src="/static/media/users/300_11.jpg">
-							</div>
-							<div class="d-flex flex-column">
-								<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-lg">Charlie Stone</a>
-								<span class="text-muted font-weight-bold font-size-sm">Art Director</span>
-							</div>
-						</div>
-						<div class="d-flex flex-column align-items-end">
-							<span class="text-muted font-weight-bold font-size-sm">7 hrs</span>
-							<span class="label label-sm label-success">4</span>
-						</div>
-					</div>
-					<!--end:User-->
-				
+					<!--end:User-->		
+					
+					{% endfor %}		
 				<div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 512px; right: -2px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 252px;"></div></div></div>
 				<!--end:Users-->
 			</div>
@@ -74,6 +59,7 @@
 	<!--end::Aside-->
 	<!--begin::Content-->
 	<div class="flex-row-fluid ml-lg-8" id="kt_chat_content">
+	{% if messages %}
 		<!--begin::Card-->
 		<div class="card card-custom">
 			<!--begin::Header-->
@@ -95,8 +81,8 @@
 					</button>
 					<!--end::Aside Mobile Toggle-->
 				</div>
-				<div class="text-center flex-grow-1">
-					<div class="text-dark-75 font-weight-bold font-size-h5">Matt Pears</div>
+				<div class="flex-grow-1">
+					<div class="text-dark-75 font-weight-bold font-size-h5">{{friend.first_name}} {{friend.last_name}}</div>
 					<div>
 						<span class="label label-sm label-dot label-success"></span>
 						<span class="font-weight-bold text-muted font-size-sm">Active</span>
@@ -174,6 +160,15 @@
 			<!--end::Footer-->
 		</div>
 		<!--end::Card-->
+		{% else %}
+		<!--begin::Card-->
+        <div class="card card-custom card-stretch card-stretch-half" style="height:635px;">
+            <div class="card-body text-center" style="padding-top:120px;">
+              <img src="/static/media/svg/chat-home.svg" style="height:50%;">
+			  <h2 style="padding-top:40px;">Start A Conversation!</h2>
+            </div>
+        </div>
+		{% endif %}
 	</div>
 	<!--end::Content-->
 </div>

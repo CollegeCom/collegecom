@@ -23,6 +23,7 @@ def chat(request,username):
     :param username:
     :return:
     """
+    users=User.objects.all()
     friend = User.objects.get(username=username)
     id = getUserId(request.user.username)
     curr_user = User.objects.get(id=id)
@@ -33,7 +34,7 @@ def chat(request,username):
     if request.method == "GET":
         return render(request, "chats/chat.html",
                       {'messages': messages,
-                       'curr_user': curr_user, 'friend': friend})
+                       'curr_user': curr_user, 'friend': friend,'users':users})
 
 @csrf_exempt
 def message_list(request, sender=None, receiver=None):
@@ -52,3 +53,8 @@ def message_list(request, sender=None, receiver=None):
             serializer.save()
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
+
+def chathome(request):
+    users=User.objects.all()
+    params={'users':users}
+    return render(request,'chats/chat.html',params)
