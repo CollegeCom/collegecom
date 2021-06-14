@@ -10047,7 +10047,6 @@ var KTLayoutQuickUser = function() {
             closeBy: 'kt_quick_user_close',
             toggleBy: 'kt_quick_user_toggle'
         });
-
         KTUtil.scrollInit(content, {
             disableForMobile: true,
             resetHeightOnDestroy: true,

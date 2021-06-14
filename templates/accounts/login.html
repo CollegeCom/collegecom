@@ -46,7 +46,7 @@
 							<!--begin::Signin-->
 							<div class="login-form login-signin py-11">
 								<!--begin::Form-->
-								<form class="form"  action="/login-user" method="post" novalidate="novalidate" id="kt_login_signin_form">
+								<form class="form" novalidate="novalidate" id="kt_login_signin_form">
 								{% csrf_token %}
 									<!--begin::Title-->
 									<div class="text-center pb-8">
@@ -82,7 +82,7 @@
 							<!--begin::Signup-->
 							<div class="login-form login-signup pt-11">
 								<!--begin::Form-->
-								<form class="form"  action="/login-user" method="post"novalidate="novalidate" id="kt_login_signup_form">
+								<form class="form" novalidate="novalidate" id="kt_login_signup_form">
 									<!--begin::Title-->
 									<div class="text-center pb-8">
 										<h2 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Sign Up</h2>
@@ -115,8 +115,8 @@
 									<!--begin::Form group-->
 									<div class="form-group">
 										<label class="checkbox mb-0">
-										<input type="checkbox" name="agree" />I Agree the
-										<a href="#">terms and conditions</a>.
+										<input type="checkbox" name="agree" />I Agree the 
+										<a href="#"> terms and conditions</a>.
 										<span></span></label>
 									</div>
 									<!--end::Form group-->
