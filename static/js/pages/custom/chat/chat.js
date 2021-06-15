@@ -3,9 +3,18 @@
 // Class definition
 var KTAppChat = function () {
 	var _chatAsideEl;
+	var _chatAsideOffcanvasObj;
+	var _chatContentEl;
+
 	// Private functions
 	var _initAside = function () {
 		// Mobile offcanvas for mobile mode
+		_chatAsideOffcanvasObj = new KTOffcanvas(_chatAsideEl, {
+			overlay: true,
+            baseClass: 'offcanvas-mobile',
+            //closeBy: 'kt_chat_aside_close',
+            toggleBy: 'kt_app_chat_toggle'
+        });
 
 		// User listing
 		var cardScrollEl = KTUtil.find(_chatAsideEl, '.scroll');

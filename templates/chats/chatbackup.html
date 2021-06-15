@@ -1,0 +1,258 @@
+{% extends 'base.html' %}
+
+{% block begincontent %}
+<div class="d-flex flex-row">
+	<!--begin::Aside-->
+	<div class="flex-row-auto offcanvas-mobile w-350px w-xl-400px" id="kt_chat_aside">
+		<!--begin::Card-->
+		<div class="card card-custom">
+			<!--begin::Body-->
+			<div class="card-body">
+				<!--begin:Search-->
+				<div class="input-group input-group-solid">
+					<div class="input-group-prepend">
+						<span class="input-group-text">
+							<span class="svg-icon svg-icon-lg">
+								<!--begin::Svg Icon | path:/static/media/svg/icons/General/Search.svg-->
+								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+									<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+										<rect x="0" y="0" width="24" height="24"></rect>
+										<path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
+										<path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" fill="#000000" fill-rule="nonzero"></path>
+									</g>
+								</svg>
+								<!--end::Svg Icon-->
+							</span>
+						</span>
+					</div>
+					<input type="text" class="form-control py-4 h-auto" placeholder="Email">
+				</div>
+				<!--end:Search-->
+				<!--begin:Users-->
+				<div class="mt-7 ps ps--active-y" style="height: 512px;">
+					{% for u in users %}
+					<!--begin:User-->
+					<div class="d-flex align-items-center justify-content-between mb-5">
+						<div class="d-flex align-items-center">
+							<div class="symbol symbol-circle symbol-50 mr-3">
+								<img alt="Pic" src="/static/media/users/300_12.jpg">
+							</div>
+							<div class="d-flex flex-column">
+								<a href="/chat/{{u.username}}" class="text-dark-75 text-hover-primary font-weight-bold font-size-lg">{{u.first_name}} {{u.last_name}}</a>
+								{% comment %} <span class="text-muted font-weight-bold font-size-sm">Head of Development</span> {% endcomment %}
+							</div>
+						</div>
+					</div>
+					<!--end:User-->		
+					
+					{% endfor %}		
+				<div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 512px; right: -2px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 252px;"></div></div></div>
+				<!--end:Users-->
+			</div>
+			<!--end::Body-->
+		</div>
+		<!--end::Card-->
+	</div><div class="offcanvas-mobile-overlay"></div>
+	<!--end::Aside-->
+	<!--begin::Content-->
+	<div class="flex-row-fluid ml-lg-8" id="kt_chat_content">
+	{% if messages %}
+		<!--begin::Card-->
+		<div class="card card-custom">
+			<!--begin::Header-->
+			<div class="card-header align-items-center px-4 py-3">
+				<div class="flex-grow-1">
+					<div class="text-dark-75 font-weight-bold font-size-h5">{{friend.first_name}} {{friend.last_name}}</div>
+					<div>
+						<span class="label label-sm label-dot label-success"></span>
+						<span class="font-weight-bold text-muted font-size-sm">Active</span>
+					</div>
+				</div>
+			</div>
+			<!--end::Header-->
+			<!--begin::Body-->
+			<div class="card-body">
+				<!--begin::Scroll-->
+				<div class="ps ps--active-y" style="height: 370px;" id="message_box" data-scroll="true" data-height="350">
+					<!--begin::Messages-->
+					<div class="messages" id="message_box">
+					{% for message in messages  %}
+					{% if curr_user == message.receiver_name %}
+						<!--begin::Message In-->
+						<div class="d-flex flex-column mb-5 align-items-start">
+							<div class="d-flex align-items-center">
+								<div class="symbol symbol-circle symbol-40 mr-3">
+									<img alt="Pic" src="/static/media/users/300_12.jpg">
+								</div>
+								<div>
+									<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">{{message.sender_name.first_name}}</a>
+									<span class="text-muted font-size-sm">{{message.time}}</span>
+								</div>
+							</div>
+							<div class="mt-2 rounded p-5 bg-light-success text-dark-50 font-weight-bold font-size-lg text-left max-w-400px">{{message.description}}</div>
+						</div>
+						<!--end::Message In-->
+					 {% else %}
+					
+						<!--begin::Message Out-->
+						<div class="d-flex flex-column mb-5 align-items-end">
+							<div class="d-flex align-items-center">
+								<div>
+									<span class="text-muted font-size-sm">{{message.time}}</span>
+									<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">{{message.sender_name.first_name}}</a>
+								</div>
+								<div class="symbol symbol-circle symbol-40 ml-3">
+									<img alt="Pic" src="/static/media/users/300_21.jpg">
+								</div>
+							</div>
+							<div class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px">{{message.description}}</div>
+						</div>
+						<!--end::Message Out-->
+						{%endif%}
+						{% endfor %}
+					</div>
+					<!--end::Messages-->
+				<div class="ps__rail-x" style="left: 0px; bottom: -607px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 607px; height: 370px; right: -2px;"><div class="ps__thumb-y" tabindex="0" style="top: 230px; height: 139px;"></div></div></div>
+				<!--end::Scroll-->
+			</div>
+			<!--end::Body-->
+			<!--begin::Footer-->
+			<div class="card-footer align-items-center">
+				<!--begin::Compose-->
+				<form method="post" class="form-group" id="chat-box">
+				<textarea class="form-control border-0 p-0" rows="2" placeholder="Type a message" id="msg_field"></textarea>
+				<div class="d-flex align-items-center justify-content-between mt-5">
+					<div class="mr-3">
+						<a href="#" class="btn btn-clean btn-icon btn-md mr-1">
+							<i class="flaticon2-photograph icon-lg"></i>
+						</a>
+						<a href="#" class="btn btn-clean btn-icon btn-md">
+							<i class="flaticon2-photo-camera icon-lg"></i>
+						</a>
+					</div>
+					<div>
+						<button type="submit"  name="send"  id="send_btn" class="btn btn-primary btn-md text-uppercase font-weight-bold chat-send py-2 px-6">Send</button>
+					</div>
+				</div>
+				<!--begin::Compose-->
+				</form>
+			</div>
+			<!--end::Footer-->
+		</div>
+		<!--end::Card-->
+		{% else %}
+		<!--begin::Card-->
+        <div class="card card-custom card-stretch card-stretch-half" style="height:635px;">
+            <div class="card-body text-center" style="padding-top:120px;">
+              <img src="/static/media/svg/chat-home.svg" style="height:50%;">
+			  <h2 style="padding-top:40px;">Start A Conversation!</h2>
+            </div>
+        </div>
+		{% endif %}
+	</div>
+	<!--end::Content-->
+</div>
+
+
+{% endblock begincontent %}
+
+
+{% block script %}
+    <script>
+
+	function scrolltoend() {
+    $('#message_box').stop().animate({
+        scrollTop: $('#message_box')[0].scrollHeight
+    }, 800);
+}
+
+$(function () {
+    setInterval(receive, 1000)
+})
+
+const text = '<div class="d-flex flex-column mb-5 align-items-start">'+
+			'<div class="d-flex align-items-center">'+
+				'<div class="symbol symbol-circle symbol-40 mr-3">'+
+					'<img alt="Pic" src="/static/media/users/300_12.jpg">'+
+				'</div>'+
+				'<div>'+
+					'<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">{sender_name}</a>'+
+				'	<span class="text-muted font-size-sm">{time}</span>'+
+			'	</div>'+
+			'</div>'+
+			'<div class="mt-2 rounded p-5 bg-light-success text-dark-50 font-weight-bold font-size-lg text-left max-w-400px">{description}</div>'+
+		'</div>'
+
+
+function receive(){
+    $.get('/api/messages/' + sender_id + '/' + receiver_id, function(data){
+        if(data.length !== 0){
+            for(var i = 0; i < data.length; i++){
+                var field = text.replace('{description}', data[i].description);
+                var time = data[i].time.slice(0, 5) + ' a.m'
+                field = field.replace('{time}', time);
+				field = field.replace('{sender_name}', sender_name)
+                $('#message_box').append(field);
+                scrolltoend();
+            }
+        }
+    })
+}
+        var messageBody = document.querySelector('#message_box');
+        messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+
+        sender_id = "{{ friend.id }}";
+        receiver_id = "{{ curr_user.id }}";
+		sender_name = "{{friend.username}}";
+
+        function scrolltoend() {
+            $('#message_box').stop().animate({
+                scrollTop: $('#message_box')[0].scrollHeight
+            }, 800);
+         }
+
+        const text_box ='<div class="d-flex flex-column mb-5 align-items-end">'+
+							'<div class="d-flex align-items-center">'+
+								'<div>'+
+									'<span class="text-muted font-size-sm">{time}</span>'+
+									'<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">{sender_name}</a>'+
+								'</div>'+
+								'<div class="symbol symbol-circle symbol-40 ml-3">'+
+									'<img alt="Pic" src="/static/media/users/300_21.jpg">'+
+								'</div>'+
+							'</div>'+
+							'<div class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px">{description}</div>'+
+						'</div>'
+
+        //For sending
+        $(function () {
+            $('#chat-box').on('submit', function (event) {
+                event.preventDefault();
+                var message = $('#msg_field');
+                send('{{ curr_user.username }}', '{{ friend.username }}', message.val());
+                message.val('');
+            })
+        })
+
+        function send(sender, receiver, message){
+
+            $.post('/api/messages', '{"sender_name": "' + sender + '", "receiver_name": "' +
+                    receiver + '","description": "' + message + '" }', function (data) {
+                var field = text_box.replace('{description}', message);
+                var today = new Date();
+                var time = today.getHours() + ":" + today.getMinutes()
+                field = field.replace('{time}', time)
+				field = field.replace('{sender_name}', sender)
+                $('#message_box').append(field);
+                scrolltoend();
+            })
+        }
+
+    </script>
+
+
+{% endblock script %}
+
+
+
+
