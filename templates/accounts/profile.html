@@ -213,16 +213,89 @@
 													<div class="form-group row">
 														<label class="col-xl-3 col-lg-3 col-form-label">Select Semester</label>
 														<div class="col-lg-4 col-md-9 col-sm-12">
-															<select class="form-control" id="kt_bootstrap_select"  id="semester" name="select">
-																	<option>First</option>
-																	<option>Second</option>
-																	<option>Third</option>
-																	<option>Fourth</option>
-																	<option>Fifth</option>
-																	<option>Sixth</option>
-																	<option>Seventh</option>
-																	<option>Eighth</option>
-															</select>
+															<select class="form-control sem-select" id="kt_bootstrap_select"  name="select">
+																	{% if euser.sem == "First" %}
+																	<option value="First" selected >First</option>
+																	<option value="Second">Second</option>
+																	<option value="Third">Third</option>
+																	<option value="Fourth">Fourth</option>
+																	<option value="Fifth">Fifth</option>
+																	<option value="Sixth">Sixth</option>
+																	<option value="Seventh">Seventh</option>
+																	<option value="Eighth">Eighth</option>
+																	
+																	{% elif  euser.sem == "Second"%}
+																	<option value="First"  >First</option>
+																	<option value="Second" selected>Second</option>
+																	<option value="Third">Third</option>
+																	<option value="Fourth">Fourth</option>
+																	<option value="Fifth">Fifth</option>
+																	<option value="Sixth">Sixth</option>
+																	<option value="Seventh">Seventh</option>
+																	<option value="Eighth">Eighth</option>
+
+																	{% elif  euser.sem == "Third"%}
+																	<option value="First"  >First</option>
+																	<option value="Second">Second</option>
+																	<option value="Third" selected>Third</option>
+																	<option value="Fourth">Fourth</option>
+																	<option value="Fifth">Fifth</option>
+																	<option value="Sixth">Sixth</option>
+																	<option value="Seventh">Seventh</option>
+																	<option value="Eighth">Eighth</option>
+
+																	{% elif  euser.sem == "Fourth"%}
+																	<option value="First"  >First</option>
+																	<option value="Second">Second</option>
+																	<option value="Third">Third</option>
+																	<option value="Fourth" selected>Fourth</option>
+																	<option value="Fifth">Fifth</option>
+																	<option value="Sixth">Sixth</option>
+																	<option value="Seventh">Seventh</option>
+																	<option value="Eighth">Eighth</option>
+
+																	{% elif  euser.sem == "Fifth"%}
+																	<option value="First"  >First</option>
+																	<option value="Second">Second</option>
+																	<option value="Third">Third</option>
+																	<option value="Fourth">Fourth</option>
+																	<option value="Fifth" selected>Fifth</option>
+																	<option value="Sixth">Sixth</option>
+																	<option value="Seventh">Seventh</option>
+																	<option value="Eighth">Eighth</option>
+
+																	{% elif  euser.sem == "Sixth"%}
+																	<option value="First"  >First</option>
+																	<option value="Second">Second</option>
+																	<option value="Third">Third</option>
+																	<option value="Fourth">Fourth</option>
+																	<option value="Fifth">Fifth</option>
+																	<option value="Sixth" selected>Sixth</option>
+																	<option value="Seventh">Seventh</option>
+																	<option value="Eighth">Eighth</option>
+
+																	{% elif  euser.sem == "Seventh"%}
+																	<option value="First"  >First</option>
+																	<option value="Second">Second</option>
+																	<option value="Third">Third</option>
+																	<option value="Fourth">Fourth</option>
+																	<option value="Fifth">Fifth</option>
+																	<option value="Sixth">Sixth</option>
+																	<option value="Seventh" selected>Seventh</option>
+																	<option value="Eighth">Eighth</option>
+
+																	{% else %}
+																	<option value="First"  >First</option>
+																	<option value="Second">Second</option>
+																	<option value="Third">Third</option>
+																	<option value="Fourth">Fourth</option>
+																	<option value="Fifth">Fifth</option>
+																	<option value="Sixth">Sixth</option>
+																	<option value="Seventh">Seventh</option>
+																	<option value="Eighth" selected>Eighth</option>
+																	
+																	{% endif %}
+															</select>	
 														</div>
 													</div>
 													<div class="row">
@@ -284,9 +357,10 @@
 				linkedin:$('#linkedin').val(),   
 				enroll:$('#enroll').val(), 
 				location:$('#location').val(), 
-				sem:$('#semester').val(),        
+				sem:$("#kt_bootstrap_select").val(),     
 				csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
 	  }
+	  
 	  data.append("profileimg",$("#profileimage")[0].files[0]);
 	  var i;
 	  for (var[key,value] of Object.entries(pdata)){

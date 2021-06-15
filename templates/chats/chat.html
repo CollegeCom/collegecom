@@ -29,12 +29,12 @@
 				<!--end:Search-->
 				<!--begin:Users-->
 				<div class="mt-7 scroll scroll-pull" style="height: 634px; overflow: hidden;">
-				{% for u in users %}
+				{% for u,eu in nusers %}
 					<!--begin:User-->
 					<div class="d-flex align-items-center justify-content-between mb-5">
 						<div class="d-flex align-items-center">
 							<div class="symbol symbol-circle symbol-50 mr-3">
-								<img alt="Pic" src="/static/media/users/300_12.jpg">
+								<img alt="Pic" src="/media/{{eu.profileimg}}">
 							</div>
 							<div class="d-flex flex-column">
 								<a href="/chat/{{u.username}}" class="text-dark-75 text-hover-primary font-weight-bold font-size-lg">{{u.first_name}} {{u.last_name}}</a>
@@ -56,7 +56,7 @@
 	<!--end::Aside-->
 	<!--begin::Content-->
 	<div class="flex-row-fluid ml-lg-8" id="kt_chat_content">
-	{% comment %} {% if messages %} {% endcomment %}
+	{% if flag == 1 %}
 		<!--begin::Card-->
 		<div class="card card-custom">
 			<!--begin::Header-->
@@ -100,7 +100,7 @@
 						<div class="d-flex flex-column mb-5 align-items-start">
 							<div class="d-flex align-items-center">
 								<div class="symbol symbol-circle symbol-40 mr-3">
-									<img alt="Pic" src="/static/media/users/300_12.jpg">
+									<img alt="Pic" src="/media/{{fuser.profileimg}}">
 								</div>
 								<div>
 									<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">{{message.sender_name.first_name}}</a>
@@ -120,7 +120,7 @@
 									<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">You</a>
 								</div>
 								<div class="symbol symbol-circle symbol-40 ml-3">
-									<img alt="Pic" src="/static/media/users/300_21.jpg">
+									<img alt="Pic" src="/media/{{euser.profileimg}}">
 								</div>
 							</div>
 							<div class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px">{{message.description}}</div>
@@ -159,7 +159,7 @@
 			<!--end::Footer-->
 		</div>
 		<!--end::Card-->
-		{% comment %} {% else %}
+	{% else %}
 		<!--begin::Card-->
        <div class="card card-custom">
 			<!--begin::Header-->
@@ -192,13 +192,14 @@
 			</div>
 			<!--end::Body-->
 		</div>
-		{% endif %} {% endcomment %}
+		{% endif %}
 	</div>
 	<!--end::Content-->
 </div>
 {% endblock begincontent %}
 {% block script %}
 <script src="/static/js/pages/custom/chat/chat.js"></script>
+{% if flag == 1 %}
  <script>
 
 	function scrolltoend() {
@@ -214,7 +215,7 @@ $(function () {
 const text = '<div class="d-flex flex-column mb-5 align-items-start">'+
 			'<div class="d-flex align-items-center">'+
 				'<div class="symbol symbol-circle symbol-40 mr-3">'+
-					'<img alt="Pic" src="/static/media/users/300_12.jpg">'+
+					'<img alt="Pic" src="/media/{{fuser.profileimg}}">'+
 				'</div>'+
 				'<div>'+
 					'<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">{sender_name}</a>'+
@@ -259,7 +260,7 @@ function receive(){
 									'<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">You</a>'+
 								'</div>'+
 								'<div class="symbol symbol-circle symbol-40 ml-3">'+
-									'<img alt="Pic" src="/static/media/users/300_21.jpg">'+
+									'<img alt="Pic" src="/media/{{euser.profileimg}}">'+
 								'</div>'+
 							'</div>'+
 							'<div class="mt-2 rounded p-5 bg-light-primary text-dark-50 font-weight-bold font-size-lg text-right max-w-400px">{description}</div>'+
@@ -290,6 +291,7 @@ function receive(){
         }
 
     </script>
+	{% endif %}
 {% endblock script %}
   
 
