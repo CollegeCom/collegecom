@@ -103,7 +103,7 @@
 									<img alt="Pic" src="/static/media/users/300_12.jpg">
 								</div>
 								<div>
-									<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">{{message.sender_name}}</a>
+									<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">{{message.sender_name.first_name}}</a>
 									<span class="text-muted font-size-sm">{{message.time}}</span>
 								</div>
 							</div>
@@ -117,7 +117,7 @@
 							<div class="d-flex align-items-center">
 								<div>
 									<span class="text-muted font-size-sm">{{message.time}}</span>
-									<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">{{message.sender_name}}</a>
+									<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">You</a>
 								</div>
 								<div class="symbol symbol-circle symbol-40 ml-3">
 									<img alt="Pic" src="/static/media/users/300_21.jpg">
@@ -218,7 +218,7 @@ const text = '<div class="d-flex flex-column mb-5 align-items-start">'+
 				'</div>'+
 				'<div>'+
 					'<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">{sender_name}</a>'+
-				'	<span class="text-muted font-size-sm">{time}</span>'+
+				'	<span class="text-muted font-size-sm pr-2">{time}</span>'+
 			'	</div>'+
 			'</div>'+
 			'<div class="mt-2 rounded p-5 bg-light-success text-dark-50 font-weight-bold font-size-lg text-left max-w-400px">{description}</div>'+
@@ -244,7 +244,7 @@ function receive(){
 
         sender_id = "{{ friend.id }}";
         receiver_id = "{{ curr_user.id }}";
-		sender_name = "{{friend.username}}";
+		sender_name = "{{friend.username.first_name}}";
 
         function scrolltoend() {
             $('#message_box').stop().animate({
@@ -255,8 +255,8 @@ function receive(){
         const text_box ='<div class="d-flex flex-column mb-5 align-items-end">'+
 							'<div class="d-flex align-items-center">'+
 								'<div>'+
-									'<span class="text-muted font-size-sm">{time}</span>'+
-									'<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">{sender_name}</a>'+
+									'<span class="text-muted font-size-sm pr-2">{time}</span>'+
+									'<a href="#" class="text-dark-75 text-hover-primary font-weight-bold font-size-h6">You</a>'+
 								'</div>'+
 								'<div class="symbol symbol-circle symbol-40 ml-3">'+
 									'<img alt="Pic" src="/static/media/users/300_21.jpg">'+
