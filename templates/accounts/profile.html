@@ -35,15 +35,14 @@
 												<!--begin::User-->
 												<div class="d-flex align-items-center">
 													<div class="symbol symbol-60 symbol-xxl-100 mr-5 align-self-start align-self-xxl-center">
-														<div class="symbol-label" style="background-image:url('/static/media/users/300_21.jpg')"></div>
+														<div class="symbol-label" style="background-image:url('/media/{{euser.profileimg}}')"></div>
 														<i class="symbol-badge bg-success"></i>
 													</div>
 													<div>
 														<a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">{{request.user.first_name}} {{request.user.last_name}}</a>
 														<div class="text-muted">Application Developer</div>
 														<div class="mt-2">
-															<a href="#" class="btn btn-sm btn-primary font-weight-bold mr-2 py-2 px-3 px-xxl-5 my-1">Chat</a>
-															<a href="#" class="btn btn-sm btn-success font-weight-bold py-2 px-3 px-xxl-5 my-1">Follow</a>
+															<a href="/chat/{{request.user}}" class="btn btn-sm btn-primary font-weight-bold mr-2 py-2 px-3 px-xxl-5 my-1">Chat</a>
 														</div>
 													</div>
 												</div>
@@ -165,20 +164,19 @@
 													<div class="form-group row">
 														<label class="col-xl-3 col-lg-3 col-form-label">Avatar</label>
 														<div class="col-lg-9 col-xl-6">
-															<div class="image-input image-input-outline " id="kt_profile_avatar" style="background-image: url(/static/media/users/blank.png)">
-																<div class="image-input-wrapper " style="background-image: url(/static/media/users/300_21.jpg)"></div>
+															<div class="image-input image-input-outline image-input-circle" id="kt_image_3">
+																<div class="image-input-wrapper" style="background-image: url(/media/{{euser.profileimg}})"></div>
+
 																<label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
-																	<i class="fa fa-pen icon-sm text-muted"></i>
-																	<input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg">
-																	<input type="hidden" name="profile_avatar_remove">
+																<i class="fa fa-pen icon-sm text-muted"></i>
+																<input type="file" name="profileimg" id="profileimage" accept=".png, .jpg, .jpeg"/>
+																<input type="hidden" name="profile_avatar_remove"/>
 																</label>
-																<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="" data-original-title="Cancel avatar">
-																	<i class="ki ki-bold-close icon-xs text-muted"></i>
+
+																<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+																<i class="ki ki-bold-close icon-xs text-muted"></i>
 																</span>
-																<span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="" data-original-title="Remove avatar">
-																	<i class="ki ki-bold-close icon-xs text-muted"></i>
-																</span>
-															</div>
+																</div>
 															<span class="form-text text-muted">Allowed file types: png, jpg, jpeg.</span>
 														</div>
 													</div>
@@ -215,8 +213,7 @@
 													<div class="form-group row">
 														<label class="col-xl-3 col-lg-3 col-form-label">Select Semester</label>
 														<div class="col-lg-4 col-md-9 col-sm-12">
-															<select class="form-control" id="kt_bootstrap_select" name="select">
-																<optgroup label="semester" id="semester">
+															<select class="form-control" id="kt_bootstrap_select"  id="semester" name="select">
 																	<option>First</option>
 																	<option>Second</option>
 																	<option>Third</option>
@@ -225,7 +222,6 @@
 																	<option>Sixth</option>
 																	<option>Seventh</option>
 																	<option>Eighth</option>
-																</optgroup>
 															</select>
 														</div>
 													</div>
@@ -279,10 +275,8 @@
 
 <script>
   function updateprofile(){
-	  $.ajax({
-			type: "POST",
-			url: "/update-profile",
-			data:{
+	  var data=new FormData();
+	var pdata={
 				firstname:$('#firstname').val(),
 				lastname:$('#lastname').val(),
 				institution:$('#institution').val(),
@@ -292,7 +286,20 @@
 				location:$('#location').val(), 
 				sem:$('#semester').val(),        
 				csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
-			}, success: function (data){
+	  }
+	  data.append("profileimg",$("#profileimage")[0].files[0]);
+	  var i;
+	  for (var[key,value] of Object.entries(pdata)){
+		  data.append(key,value);
+	  }
+	  $.ajax({
+			type: "POST",
+			url: "/update-profile",
+			data:data, 
+			contentType:false,
+			processData:false,
+			enctype: 'multipart/form-data',
+			success: function (data){
 				if (data==1){
 					toastr.success("Profile Updated Successfully");
 				}

@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from accounts.models import extUser
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+import os
 
 # Create your views here.
 def login(request):
@@ -84,17 +85,19 @@ def updateprofile(request):
         enroll=request.POST['enroll']
         sem=request.POST['sem']
         city=request.POST['location']
+        profileimg=request.FILES['profileimg']
+        print(profileimg,'This is Profile Image')
         user=User.objects.get(id=request.user.id)
         user.first_name=firstname
         user.last_name=lastname
         user.save()
         up=extUser.objects.get(user__id=request.user.id)
+        up.profileimg=profileimg
         up.institution=institution
         up.cemail=cemail
         up.enroll=enroll
         up.linkedin=linkedin
         up.sem=sem
         up.city=city
-        up.save()
         success=1
         return HttpResponse(success)
