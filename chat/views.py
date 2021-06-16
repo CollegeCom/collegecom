@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
-from chat.models import  Friends, Messages
+from chat.models import Messages
 from django.views.decorators.csrf import csrf_exempt
 from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser

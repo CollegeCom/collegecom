@@ -35,7 +35,8 @@
 												<!--begin::User-->
 												<div class="d-flex align-items-center">
 													<div class="symbol symbol-60 symbol-xxl-100 mr-5 align-self-start align-self-xxl-center">
-														<div class="symbol-label" style="background-image:url('/media/{{euser.profileimg}}')"></div>
+													<img class="image-input-wrapper" src="/media/{{euser.profileimg}}" id="profile-image-show-overview" >
+														
 														<i class="symbol-badge bg-success"></i>
 													</div>
 													<div>
@@ -160,12 +161,11 @@
 													<div class="form-group row">
 														<label class="col-xl-3 col-lg-3 col-form-label">Avatar</label>
 														<div class="col-lg-9 col-xl-6">
-															<div class="image-input image-input-outline image-input-circle" id="kt_image_3">
-																<div class="image-input-wrapper" style="background-image: url(/media/{{euser.profileimg}})"></div>
-
-																<label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
+															<div class="image-input image-input-outline image-input-circle" id="kt_image_3">														
+																<img class="image-input-wrapper" src="/media/{{euser.profileimg}}" id="profile-image-show" >
+																<label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar" >
 																<i class="fa fa-pen icon-sm text-muted"></i>
-																<input type="file" name="profileimg" id="profileimage" accept=".png, .jpg, .jpeg"/>
+																<input type="file" name="profileimg" id="profileimage" accept=".png, .jpg, .jpeg" onchange="loadFile(event)"/>
 																<input type="hidden" name="profile_avatar_remove"/>
 																</label>
 
@@ -383,6 +383,21 @@ $('#kt_bootstrap_select').on('changed.bs.select', function() {
  // Revalidate field
  validator.revalidateField('select');
 });
+</script>
+
+<script>
+  var loadFile = function(event) {
+    var output = document.getElementById('profile-image-show');
+	var output1 = document.getElementById('profile-image-show-overview');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output1.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+	output1.onload = function() {
+      URL.revokeObjectURL(output1.src) // free memory
+    }
+  };
 </script>
   
 {% endblock script %}

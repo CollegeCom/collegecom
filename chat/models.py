@@ -13,12 +13,3 @@ class Messages(models.Model):
 
     class Meta:
         ordering = ('timestamp',)
-
-
-class Friends(models.Model):
-
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    friend = models.IntegerField()
-
-    def __str__(self):
-        return f"{self.friend}"

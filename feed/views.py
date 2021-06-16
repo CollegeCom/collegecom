@@ -1,6 +1,8 @@
+from django.http.response import JsonResponse
 from accounts.models import extUser
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 from .models import Comment, Feed
 from datetime import date
 import time
@@ -20,7 +22,8 @@ def addpost(request):
         except:
             pass
         af.save()
-        return redirect('home')
+        success=str(af.image)
+        return HttpResponse(success)
 
 def addcomment(request):
     if request.method=="POST":

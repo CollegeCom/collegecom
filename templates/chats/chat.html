@@ -297,7 +297,7 @@ function receive(){
                     receiver + '","description": "' + message + '" }', function (data) {
                 var field = text_box.replace('{description}', message);
                 var today = new Date();
-                var time = today.getHours() + ":" + today.getMinutes()
+                var time = today.getHours() + ":" + today.getMinutes();
                 field = field.replace('{time}', time)
 				field = field.replace('{sender_name}', sender)
                 $('#message_box').append(field);
