@@ -1,4 +1,19 @@
 {% extends 'base.html' %}
+{% block title %}Chat - CollegeCom{% endblock title %}
+{% block pagetitle %}Chat - Start Your Conversation{% endblock pagetitle %}
+{% block breadcrumb %}
+<div class="d-flex align-items-center font-weight-bold my-2">
+											<!--begin::Item-->
+											<a href="/" class="opacity-75 hover-opacity-100">
+												<i class="flaticon2-shelter text-white icon-1x"></i>
+											</a>
+											<!--end::Item-->
+											<!--begin::Item-->
+											<span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
+											<span class="text-white text-hover-white opacity-75 hover-opacity-100">Chat</span>
+											<!--end::Item-->
+										</div>
+{% endblock breadcrumb %}
 {% block begincontent %}
 <div class="d-flex flex-row">
 	<!--begin::Aside-->
@@ -40,9 +55,9 @@
 								<a href="/chat/{{u.username}}" class="text-dark-75 text-hover-primary font-weight-bold font-size-lg">{{u.first_name}} {{u.last_name}}</a>
 							</div>
 						</div>
-						<div class="d-flex flex-column align-items-end">
+						{% comment %} <div class="d-flex flex-column align-items-end">
 							<span class="text-muted font-weight-bold font-size-sm">35 mins</span>
-						</div>
+						</div> {% endcomment %}
 					</div>
 					<!--end:User-->
 					{% endfor %}

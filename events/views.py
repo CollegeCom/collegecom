@@ -1,8 +1,10 @@
 from django.shortcuts import  redirect, render
 from events.models import Event
 from django.http import HttpResponse
+from accounts.models import extUser
 def addevent(request):
-    return render(request,'events/add_event.html')
+    euser=extUser.objects.get(user__id=request.user.id)
+    return render(request,'events/add_event.html',{'euser':euser})
 
 def addingevent(request):
     if request.method=="POST":

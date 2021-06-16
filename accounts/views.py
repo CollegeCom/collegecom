@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from accounts.models import extUser
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from feedback.models import Complaint,Feedback
 import os
 
 # Create your views here.
@@ -108,3 +109,14 @@ def updateprofile(request):
         return HttpResponse(success)
 
 
+def profile_overview(request):
+    comp=Complaint.objects.filter(postedby=request.user.username)
+    feedback=Feedback.objects.filter(postedby=request.user.username)
+    euser=extUser.objects.get(user__id=request.user.id)
+    params={'comp':comp,'feedback':feedback,'euser':euser}
+    return render(request,'accounts/profile-overview.html',params)
+
+def contacts(request):
+    euser=extUser.objects.exclude(user__id=request.user.id)
+    cuser=extUser.objects.get(user__id=request.user.id)
+    return render(request,'accounts/contacts.html',{'contacts':euser,'euser':cuser})

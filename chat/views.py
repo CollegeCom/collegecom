@@ -65,5 +65,5 @@ def chathome(request):
     users=User.objects.exclude(id=request.user.id)      
     euser=extUser.objects.exclude(user__id=request.user.id)
     nuser=zip(users,euser)
-    params={'nusers':nuser,'flag':flag}
+    params={'nusers':nuser,'flag':flag,'euser':euser}
     return render(request,'chats/chat.html',params)

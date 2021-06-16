@@ -1,11 +1,14 @@
+from accounts.models import extUser
 from comshop.models import Product
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from datetime import date
+from accounts.models import extUser
 # Create your views here.
 def shop(request):
     products=Product.objects.all()
-    params={'products':products}
+    euser=extUser.objects.get(user__id=request.user.id)
+    params={'products':products,'euser':euser}
     return render(request,'comshop/shophome.html',params)
 
 def addproduct(request):

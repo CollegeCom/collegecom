@@ -9,21 +9,24 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 @login_required(login_url='login')
 def addfeedback(request):
+    euser=extUser.objects.get(user__id=request.user.id)
     feedbacks = Feedback.objects.all()
-    params = {'feedbacks':feedbacks}
+    params = {'feedbacks':feedbacks,'euser':euser}
     return render(request,'feedback/addfeedback.html',params)
 
 @login_required(login_url='login')
 def addcomplaint(request):
-    return render(request,'feedback/addcomplaint.html')
+    euser=extUser.objects.get(user__id=request.user.id)
+    return render(request,'feedback/addcomplaint.html',{'euser':euser})
 
 
 @login_required(login_url='login')
 def complaints(request):
+    euser=extUser.objects.get(user__id=request.user.id)
     pcomplaints = Complaint.objects.filter(status=0)
     scomplaints = Complaint.objects.filter(status=1)
     rcomplaints = Complaint.objects.filter(status=2)
-    params = {'pcomplaints':pcomplaints,'scomplaints':scomplaints,'rcomplaints':rcomplaints}
+    params = {'pcomplaints':pcomplaints,'scomplaints':scomplaints,'rcomplaints':rcomplaints,'euser':euser}
 
     return render(request,'feedback/complaint-list.html',params)
 
