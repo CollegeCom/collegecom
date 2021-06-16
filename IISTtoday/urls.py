@@ -26,6 +26,8 @@ urlpatterns = [
     path('',include('comshop.urls')),
     path('',include('events.urls')),
     path('',include('chat.urls')),
+    path('',include('feed.urls')),
+
 ]
 
 
