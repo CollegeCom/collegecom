@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% block title %}
+  Add Notice
+{% endblock title %}
+{% block pagetitle %}
+  Add Notice
+{% endblock pagetitle %}
+  
+
+{% block breadcrumb %}
+<div class="d-flex align-items-center font-weight-bold my-2">
+											<!--begin::Item-->
+											<a href="#" class="opacity-75 hover-opacity-100">
+												<i class="flaticon2-shelter text-white icon-1x"></i>
+											</a>
+											<!--end::Item-->
+											<!--begin::Item-->
+											<span class="label label-dot label-sm bg-white opacity-75 mx-3"></span>
+											<a href="" class="text-white text-hover-white opacity-75 hover-opacity-100">Add Notice </a>
+											<!--end::Item-->
+										</div>
+{% endblock breadcrumb %}
+{% block begincontent %}
+   <div class="content d-flex flex-column flex-column-fluid" id="kt_content" onload="showtoast()">
+						<!--begin::Entry-->
+						<div class="d-flex flex-column-fluid">
+							<!--begin::Container-->
+							<div class="container">
+								<!--begin::Section-->
+								<div class="text-center">
+									<h1 class="h2 font-weight-bolder text-white mb-6">Add A Notice</h1>
+								</div>
+								<!--end::Section-->
+								<!--begin::Card-->
+								<div class="card card-custom gutter-b">
+									<div class="card-header">
+										<div class="card-title">
+											<h5 class="card-label">Important Information</h5>
+										</div>
+									</div>
+									<!--begin::Form-->
+									<form class="form" action="/adding-notice" method="POST" enctype='multipart/form-data'>{% csrf_token %}
+										<div class="card-body">
+											<div class="row">
+												<div class="col-xl-3"></div>
+												<div class="col-xl-6">
+													<!--begin::Input-->
+													<div class="form-group">
+														<label>Notice Title</label>
+														<input type="text" id="title" name="title" class="form-control form-control-solid form-control-lg" placeholder="Notice Title">
+													</div>
+													<!--end::Input-->
+                                                    <!--begin::Input-->
+													<div class="form-group">
+														<label>Notice Headline</label>
+														<input type="text" id="notice_slogan" name="notice_slogan" class="form-control form-control-solid form-control-lg" placeholder="Notice Slogan">
+													</div>
+													<!--end::Input-->
+													<!--begin::Input-->
+													<div class="form-group">
+														<label>Notice Category</label>
+														<div></div>
+														<select class="form-control" id="noticecat" name="noticecat">
+																<optgroup label="Notice Category">
+																	<option>College</option>
+																	<option>Club</option>
+																	<option>Faculty</option>
+																	<option>Student</option>
+																	<option>Sports</option>
+																</optgroup>
+															</select>
+													</div>
+
+													<div class="form-group">
+
+												<label >Notice Date</label>
+												
+													<div class="row">
+														<div class="col">
+															<div class="input-group date" id="kt_datetimepicker_7_1" data-target-input="nearest">
+																<input type="text" class="form-control datetimepicker-input" name="date" placeholder="Notice date" data-target="#kt_datetimepicker_7_1" />
+																<div class="input-group-append" data-target="#kt_datetimepicker_7_1" data-toggle="datetimepicker">
+																	<span class="input-group-text">
+																		<i class="ki ki-calendar"></i>
+																	</span>
+																</div>
+															</div>
+														</div>
+													</div>
+											
+											</div>
+													<!--end::Input-->
+													<!--begin::Input-->
+													<div class="form-group">
+														<label for="exampleTextarea">Notice Description</label>
+														<textarea name="noticedesc" id="noticedesc" class="form-control form-control-solid form-control-lg" id="exampleTextarea" rows="3"></textarea>
+														<span class="form-text text-muted">Important Notifications !</span>
+													</div>
+													<div class="form-group">
+														<label>Notice Files/Images</label>
+														<div></div>
+														<div class="custom-file">
+														<input type="file" class="custom-file-input"  name="notice_file" id="customFile"/>
+														<label class="custom-file-label" for="customFile">Choose file</label>
+														</div>
+													</div>
+													<!--end::Input-->
+												</div>
+												<div class="col-xl-3"></div>
+											</div>
+										</div>
+
+											<div class="card-footer">
+											<div class="row">
+												<div class="col-xl-3"></div>
+												<div class="col-xl-6">
+													<button type="submit" class="btn btn-primary font-weight-bold mr-2">Submit</button>
+												</div>
+												<div class="col-xl-3"></div>
+											</div>
+										</div>
+									</form>
+									
+									<!--end::Form-->
+									<!--begin::Actions-->
+									
+										<!--end::Actions-->
+								</div>
+								<!--end::Card-->
+							</div>
+							<!--end::Container-->
+						</div>
+						<!--end::Entry-->
+					</div>
+{% endblock begincontent %}
+
+   
+{% block script %}
+<script>
+window.onload = function showtoast() {
+            {% if success %}
+toastr.success("Notice Added Successfully");
+{% endif %}
+        }
+</script>
+{% endblock script %}
+
+
