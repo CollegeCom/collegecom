@@ -40,6 +40,8 @@ def addcomment(request):
         cm.time=ctime
         cm.feed=feed
         cm.save()
+        feed.comments+=1
+        feed.save()
         return redirect('home')
 
 

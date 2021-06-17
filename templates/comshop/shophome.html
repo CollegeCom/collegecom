@@ -27,16 +27,16 @@
 										<!--begin::Forms Widget 13-->
 										<div class="card card-custom gutter-b">
 											<div class="card-header border-0 pt-5">
-												<h3 class="card-title align-items-start flex-column mb-3">
-													<span class="card-label font-size-h3 font-weight-bolder text-dark">Add New Product</span>
+												<h3 class="card-title align-items-start flex-column">
+													<span class="card-label font-size-h3 font-weight-bolder text-dark">List An Item</span>
 												</h3>
 											</div>
 											<!--begin::Body-->
-											<div class="card-body pt-4">
+											<div class="card-body">
 												<!--begin::Form-->
 												<form action="/add-product" method="post" enctype='multipart/form-data'>{% csrf_token %}
 													<!--begin::Product info-->
-													<div class="mt-6">
+													<div class="product-form">
 														<div class="text-muted mb-4 font-weight-bolder font-size-lg">Product Info</div>
 														<!--begin::Input-->
 														<div class="form-group mb-8">

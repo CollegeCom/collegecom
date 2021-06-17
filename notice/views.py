@@ -22,6 +22,6 @@ def addingnotice(request):
         notice.descripton=description
         notice.file=poster
         notice.save()
-        return redirect('/add-notice' ,{'success':1})
+        return redirect('/add-notice' ,{'msgs':1})
 
         

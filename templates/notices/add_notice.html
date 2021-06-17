@@ -21,7 +21,7 @@
 										</div>
 {% endblock breadcrumb %}
 {% block begincontent %}
-   <div class="content d-flex flex-column flex-column-fluid" id="kt_content" onload="showtoast()">
+   <div class="content d-flex flex-column flex-column-fluid" id="kt_content" >
 						<!--begin::Entry-->
 						<div class="d-flex flex-column-fluid">
 							<!--begin::Container-->
@@ -133,16 +133,4 @@
 						<!--end::Entry-->
 					</div>
 {% endblock begincontent %}
-
-   
-{% block script %}
-<script>
-window.onload = function showtoast() {
-            {% if success %}
-toastr.success("Notice Added Successfully");
-{% endif %}
-        }
-</script>
-{% endblock script %}
-
 
