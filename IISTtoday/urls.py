@@ -27,7 +27,7 @@ urlpatterns = [
     path('',include('events.urls')),
     path('',include('chat.urls')),
     path('',include('feed.urls')),
-
+    path('',include('notice.urls')),
 ]
 
 
