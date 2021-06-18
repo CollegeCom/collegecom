@@ -24,4 +24,9 @@ def addingnotice(request):
         notice.save()
         return redirect('/add-notice' ,{'msgs':1})
 
+def shownotice(request,noticeslug):
+    event=Notice.objects.get(slug=noticeslug)
+    othernotices=Notice.objects.exclude(slug=noticeslug)
+    return render(request,'events/show_event.html',{'event':event,'othernotices':othernotices})
+
         

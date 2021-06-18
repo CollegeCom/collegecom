@@ -10,5 +10,6 @@ urlpatterns = [
     path('logout',views.log_out,name="log_out"),
     path('update-profile',views.updateprofile,name="updateprofile"),
     path('contacts',views.contacts,name="contacts"),
+    path('search',views.search,name="search"),
     # path('register-user',views.registeruser,name="registeruser"),
 ]

@@ -40,7 +40,7 @@
 														<i class="symbol-badge bg-success"></i>
 													</div>
 													<div>
-														<a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">{{request.user.first_name}} {{request.user.last_name}} <i class="flaticon2-correct text-success font-size-h5"></i></a>
+														<a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">{{request.user.first_name}} {{request.user.last_name}} {% if euser.vbadge == True %}<i class="flaticon2-correct text-success font-size-h5"></i>{% endif %}</a>
 														<div class="text-muted">Application Developer</div>
 														<div class="mt-2">
 															<a href="/chat/{{request.user}}" class="btn btn-sm btn-primary font-weight-bold mr-2 py-2 px-3 px-xxl-5 my-1">Chat</a>

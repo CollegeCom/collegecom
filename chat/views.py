@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from chat.models import Messages
+from django.db.models.query_utils import Q
 from django.views.decorators.csrf import csrf_exempt
 from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser
@@ -23,10 +24,8 @@ def chat(request,username):
     :param request:
     :param username:
     :return:
-    """
-    users=User.objects.exclude(id=request.user.id)      
-    euser=extUser.objects.exclude(user__id=request.user.id)
-    nuser=zip(users,euser)
+    """    
+    nuser=extUser.objects.exclude(user__id=request.user.id)
     muser=extUser.objects.get(user__id=request.user.id)
     friend = User.objects.get(username=username)
     id = getUserId(request.user.username)
@@ -40,7 +39,7 @@ def chat(request,username):
     if request.method == "GET":
         return render(request, "chats/chat.html",
                       {'messages': messages,
-                       'curr_user': curr_user, 'friend': friend,'users':users ,'flag':flag ,'euser':muser,'fuser':fuser,'nusers':nuser})
+                       'curr_user': curr_user, 'friend': friend,'flag':flag ,'euser':muser,'fuser':fuser,'eusers':nuser})
 
 @csrf_exempt
 def message_list(request, sender=None, receiver=None):
@@ -62,8 +61,20 @@ def message_list(request, sender=None, receiver=None):
 
 def chathome(request):
     flag=0
-    users=User.objects.exclude(id=request.user.id)      
     euser=extUser.objects.exclude(user__id=request.user.id)
-    nuser=zip(users,euser)
-    params={'nusers':nuser,'flag':flag,'euser':euser}
+    params={'flag':flag,'eusers':euser}
     return render(request,'chats/chat.html',params)
+
+def chatsearch(request):
+    if request.method=="GET":
+        flag=0
+        search=request.GET['search']
+        s=search.split(' ')
+        if len(s)>1:
+            s1,s2=s[0],s[1]
+        else:
+            s1,s2=search,search
+        print(s1,s2)
+        users=extUser.objects.filter(Q(user__first_name__icontains=search) | Q(user__last_name__icontains=search) | Q(user__first_name__icontains=s1) | Q(user__last_name__icontains=s2) | Q(user__first_name__icontains=s2) | Q(user__last_name__icontains=s1)).exclude(user__id=request.user.id)
+        params={'flag':flag,'eusers':users}
+        return render(request,'chats/chat.html',params)

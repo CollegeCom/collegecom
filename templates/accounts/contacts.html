@@ -4,11 +4,12 @@
 {% block subheadright %}
 <div class="quick-search">
             <!--begin:Form-->
-            <form method="get" class="quick-search-form bg-white rounded">
+            <form method="get" action="/search" class="quick-search-form bg-white rounded">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
-                            <span class="svg-icon svg-icon-lg">
+                            <a type="submit">
+							   <span class="svg-icon svg-icon-lg">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/General/Search.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -19,9 +20,10 @@
                                 </svg>
                                 <!--end::Svg Icon-->
                             </span>
+							</a>
                         </span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Search Users...">
+                    <input type="text" class="form-control" name="search" placeholder="Search Users...">
                     <div class="input-group-append">
                         <span class="input-group-text">
                             <i class="quick-search-close ki ki-close icon-sm text-muted"></i>
@@ -55,8 +57,8 @@
 															<!--end::Pic-->
 															<!--begin::Title-->
 															<div class="d-flex flex-column">
-																<a href="/chat/{{u.user.username}}" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0">{{u.user.first_name}} {{u.user.last__name}} {% if u.vbadge is True %}<i class="flaticon2-correct text-success font-size-h5"></i>{% endif %}</a>
-																<span class="text-muted font-weight-bold">{{u.role}} of <strong>{{u.department}} Dept.</strong></span>
+																<a href="/chat/{{u.user.username}}" class="text-dark font-weight-bold text-hover-primary font-size-h4 mb-0">{{u.user.first_name}} {{u.user.last_name}} {% if u.vbadge is True %}<i class="flaticon2-correct text-success font-size-h5"></i>{% endif %}</a>
+																<span class="text-muted font-weight-bold">{% if u.department %}{{u.role}} of <strong>{{u.department}} Dept. {% else %}{{u.role}}{% endif %}</strong></span>
 															</div>
 															<!--end::Title-->
 														</div>

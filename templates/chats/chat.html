@@ -23,10 +23,12 @@
 			<!--begin::Body-->
 			<div class="card-body">
 				<!--begin:Search-->
-				<div class="input-group input-group-solid">
+				<form action="/chat-search" method="get">
+				   <div class="input-group input-group-solid">
 					<div class="input-group-prepend">
 						<span class="input-group-text">
-							<span class="svg-icon svg-icon-lg">
+							<a type="submit">
+							  <span class="svg-icon svg-icon-lg">
 								<!--begin::Svg Icon | path:/static/media/svg/icons/General/Search.svg-->
 								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 									<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -37,22 +39,24 @@
 								</svg>
 								<!--end::Svg Icon-->
 							</span>
+							</a>
 						</span>
 					</div>
-					<input type="text" class="form-control py-4 h-auto" placeholder="Email">
+					<input type="text" name="search" class="form-control py-4 h-auto" placeholder="Search Users...">
 				</div>
+				</form>
 				<!--end:Search-->
 				<!--begin:Users-->
 				<div class="mt-7 scroll scroll-pull" style="height: 634px; overflow: hidden;">
-				{% for u,eu in nusers %}
+				{% for u in eusers %}
 					<!--begin:User-->
 					<div class="d-flex align-items-center justify-content-between mb-5">
 						<div class="d-flex align-items-center">
 							<div class="symbol symbol-circle symbol-50 mr-3">
-								<img alt="Pic" src="/media/{{eu.profileimg}}">
+								<img alt="Pic" src="/media/{{u.profileimg}}">
 							</div>
 							<div class="d-flex flex-column">
-								<a href="/chat/{{u.username}}" class="text-dark-75 text-hover-primary font-weight-bold font-size-lg">{{u.first_name}} {{u.last_name}}</a>
+								<a href="/chat/{{u.user.username}}" class="text-dark-75 text-hover-primary font-weight-bold font-size-lg">{{u.user.first_name}} {{u.user.last_name}}</a>
 							</div>
 						</div>
 						{% comment %} <div class="d-flex flex-column align-items-end">

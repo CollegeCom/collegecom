@@ -29,4 +29,7 @@ def addingevent(request):
 
         return redirect('/add-event')
 
-        
+def showevent(request,eventslug):
+    event=Event.objects.get(slug=eventslug)
+    otherevents=Event.objects.exclude(slug=eventslug)
+    return render(request,'events/show_event.html',{'event':event,'otherevents':otherevents})

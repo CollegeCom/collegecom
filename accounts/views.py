@@ -1,3 +1,4 @@
+from django.db.models.query_utils import Q
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as authlogin, logout
@@ -120,3 +121,15 @@ def contacts(request):
     euser=extUser.objects.exclude(user__id=request.user.id)
     cuser=extUser.objects.get(user__id=request.user.id)
     return render(request,'accounts/contacts.html',{'contacts':euser,'euser':cuser})
+
+def search(request):
+    if request.method=="GET":
+        search=request.GET['search']
+        s=search.split(' ')
+        if len(s)>1:
+            s1,s2=s[0],s[1]
+        else:
+            s1,s2=search,search
+        print(s1,s2)
+        users=extUser.objects.filter(Q(user__first_name__icontains=search) | Q(role__icontains=search) | Q(department__icontains=search) | Q(user__last_name__icontains=search) | Q(user__first_name__icontains=s1) | Q(user__last_name__icontains=s2) | Q(user__first_name__icontains=s2) | Q(user__last_name__icontains=s1) | Q(enroll__icontains=search))
+        return render(request,'accounts/contacts.html',{'contacts':users})
