@@ -33,7 +33,7 @@
                         <!--end::Svg Icon-->
                         <!--end::Icon-->
                         <!--begin::Label-->
-                        <span class="fw-bolder text-gray-400">06 April 2021</span>
+                        <span class="fw-bolder text-gray-400">{{event.date}}</span>
                         <!--end::Label-->
                      </div>
                      <!--end::Item-->
@@ -57,7 +57,6 @@
                   </div>
                   <!--end::Info-->
                   <!--begin::Title-->
-                  <span class="fw-bolder text-muted fs-5 ps-1">5 mins read</span></a>
                   <!--end::Title-->
                   <!--begin::Container-->
                   <div class="overlay mt-8">
@@ -74,6 +73,29 @@
                <div class="fs-5 fw-bold text-gray-600">
                   <!--begin::Text-->
                   {{event.descripton}}
+
+                  {% if event.file %}
+                  <div class="row mt-5">
+                  <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+                  <div class="card card-custom gutter-b card-stretch">
+														
+														<div class="card-body">
+                                          
+															<div class="d-flex flex-column align-items-center">
+																<!--begin: Icon-->
+                                                
+																<img  alt="" class="max-h-65px" src="/static/media/svg/files/pdf.svg">
+																<!--end: Icon-->
+																<!--begin: Tite-->
+																<a href="/media/{{event.file}}" class="text-dark-75 font-weight-bold mt-15 font-size-lg">Technical Requiremnts.pdf</a>
+																<!--end: Tite-->
+															</div>
+														</div>
+													</div>
+                  </div>
+                  </div>
+                  
+                  {% endif %}
                   <!--end::Text-->
                </div>
                <!--end::Description-->

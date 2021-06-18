@@ -73,7 +73,7 @@
 										
 								<a onclick="check{{c.id}}()" class="btn btn-light-success btn-sm  font-weight-bold mr-2" id="mark_solved-{{c.id}}">Mark as Solved</a>{% csrf_token %}
 								<a onclick="statusr{{c.id}}()" class="btn btn-light-danger btn-sm font-weight-bold mr-2">Reject Complaint</a>
-								<a href="#" class="btn btn-light-primary btn-sm  font-weight-bold mr-2">Message</a>
+								<a href="/chat/{{c.postedby}}" class="btn btn-light-primary btn-sm  font-weight-bold mr-2">Message</a>
 									</div>
 									</div>
 									</div>
@@ -128,7 +128,7 @@
 									<div class="col-lg-4">
 										<div class="button">
 										
-								<a href="#" class="btn btn-light-primary btn-sm float-right  font-weight-bold mr-2">Message</a>
+								<a href="/chat/{{c.postedby}}" class="btn btn-light-primary btn-sm float-right  font-weight-bold mr-2">Message</a>
 									</div>
 									</div>
 									</div>
@@ -184,7 +184,7 @@
 										<div class="button">
 										
 								<a onclick="statussol{{c.id}}()" class="btn btn-light-success btn-sm float-right font-weight-bold mr-2" id="mark_solved-{{c.id}}">Mark as Solved</a>{% csrf_token %}
-								<a onclick="#" class="btn btn-light-primary btn-sm  float-right font-weight-bold mr-2">Message</a>
+								<a onclick="/chat/{{c.postedby}}" class="btn btn-light-primary btn-sm  float-right font-weight-bold mr-2">Message</a>
 									</div>
 									</div>
 									</div>
