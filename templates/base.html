@@ -14,7 +14,7 @@
 		<!--end::Global Theme Styles-->
 		<!--begin::Layout Themes(used by all pages)-->
 		<!--end::Layout Themes-->
-		<link rel="shortcut icon" href="/static/media/logos/ccom.png">
+		<link rel="shortcut icon" href="/static/media/logos/logo-new.png">
 	<script data-dapp-detection="">!function(){let e=!1;function n(){if(!e){const n=document.createElement("meta");n.name="dapp-detected",document.head.appendChild(n),e=!0}}if(window.hasOwnProperty("ethereum")){if(window.__disableDappDetectionInsertion=!0,void 0===window.ethereum)return;n()}else{var t=window.ethereum;Object.defineProperty(window,"ethereum",{configurable:!0,enumerable:!1,set:function(e){window.__disableDappDetectionInsertion||n(),t=e},get:function(){if(!window.__disableDappDetectionInsertion){const e=arguments.callee;e&&e.caller&&e.caller.toString&&-1!==e.caller.toString().indexOf("getOwnPropertyNames")||n()}return t}})}}();</script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -110,7 +110,7 @@
 													<i class="menu-arrow"></i>
 												</a>
 											</li>
-											{% if request.user.exuser.role == HOD or request.user.exuser.role == Moderator or request.user.exuser.role == Principal or request.user.exuser.role == D.G. %}
+											{% if request.user.exuser.role == "HOD" or request.user.exuser.role == "Moderator" or request.user.exuser.role == "Principal" or request.user.exuser.role == "D.G." %}
 											<li class="menu-item menu-item-rel">
 												<a href="/complaints" class="menu-link">
 													<span class="menu-text">Complaints</span>
@@ -182,7 +182,7 @@
 												</a>
 											</div>
 											<!--end:Item-->
-											{% if request.user.exuser.role == HOD or request.user.exuser.role == Moderator or request.user.exuser.role == Principal or request.user.exuser.role == D.G. %}
+											{% if request.user.exuser.role == "HOD" or request.user.exuser.role == "Moderator" or request.user.exuser.role == "Principal" or request.user.exuser.role == "D.G." %}
 											  <!--begin:Item-->
 											<div class="col-6">
 												<a href="/add-event" class="d-block py-10 px-5 text-center bg-hover-light border-right">

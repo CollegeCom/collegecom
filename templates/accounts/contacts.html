@@ -68,10 +68,13 @@
 																<span class="text-dark-75 font-weight-bolder mr-2">Email:</span>
 																<a href="#" class="text-muted text-hover-primary">{{u.cemail}}</a>
 															</div>
+
+															{% if u.role != "HOD" and u.role != "Moderator" and u.role != "Principal" and u.role != "D.G." %}
 															<div class="d-flex justify-content-between align-items-cente my-1">
 																<span class="text-dark-75 font-weight-bolder mr-2">Enrollment:</span>
 																<a href="#" class="text-muted text-hover-primary">{{u.enroll}}</a>
 															</div>
+															{%endif%}
 															<div class="d-flex justify-content-between align-items-center">
 																<span class="text-dark-75 font-weight-bolder mr-2">Location:</span>
 																<span class="text-muted font-weight-bold">{{u.city}}</span>
