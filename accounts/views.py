@@ -72,11 +72,12 @@ def loginuser(request):
     else:
         return redirect('/')
     
-
+@login_required(login_url='login')
 def log_out(request):
     logout(request)
     return redirect('login')
 
+@login_required(login_url='login')
 def updateprofile(request):
     if request.method=="POST":
         firstname=request.POST['firstname']
@@ -109,7 +110,7 @@ def updateprofile(request):
         success=1
         return HttpResponse(success)
 
-
+@login_required(login_url='login')
 def profile_overview(request):
     comp=Complaint.objects.filter(postedby=request.user.username)
     feedback=Feedback.objects.filter(postedby=request.user.username)
@@ -117,11 +118,13 @@ def profile_overview(request):
     params={'comp':comp,'feedback':feedback,'euser':euser}
     return render(request,'accounts/profile-overview.html',params)
 
+@login_required(login_url='login')
 def contacts(request):
     euser=extUser.objects.exclude(user__id=request.user.id)
     cuser=extUser.objects.get(user__id=request.user.id)
     return render(request,'accounts/contacts.html',{'contacts':euser,'euser':cuser})
 
+@login_required(login_url='login')
 def search(request):
     if request.method=="GET":
         search=request.GET['search']

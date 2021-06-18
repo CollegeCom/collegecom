@@ -1,10 +1,10 @@
 from django.http.response import HttpResponse
 import feedback
 from django.shortcuts import redirect, render
-from django.contrib.auth.models import User
 from accounts.models import extUser
 from feedback.models import Complaint, Feedback
 from django.contrib.auth.decorators import login_required
+rolelist = ['HOD','Principal','D.G.','Moderator']
 
 # Create your views here.
 @login_required(login_url='login')
@@ -22,13 +22,16 @@ def addcomplaint(request):
 
 @login_required(login_url='login')
 def complaints(request):
-    euser=extUser.objects.get(user__id=request.user.id)
-    pcomplaints = Complaint.objects.filter(status=0)
-    scomplaints = Complaint.objects.filter(status=1)
-    rcomplaints = Complaint.objects.filter(status=2)
-    params = {'pcomplaints':pcomplaints,'scomplaints':scomplaints,'rcomplaints':rcomplaints,'euser':euser}
-
-    return render(request,'feedback/complaint-list.html',params)
+    global rolelist
+    if request.user.exuser.role in rolelist:
+        euser=extUser.objects.get(user__id=request.user.id)
+        pcomplaints = Complaint.objects.filter(status=0)
+        scomplaints = Complaint.objects.filter(status=1)
+        rcomplaints = Complaint.objects.filter(status=2)
+        params = {'pcomplaints':pcomplaints,'scomplaints':scomplaints,'rcomplaints':rcomplaints,'euser':euser}
+        return render(request,'feedback/complaint-list.html',params)
+    else:
+        return redirect('/error-404')
 
 @login_required(login_url='login')
 def addingcomplaint(request):

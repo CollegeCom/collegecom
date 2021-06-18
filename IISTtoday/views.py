@@ -15,3 +15,6 @@ def home(request):
     user=extUser.objects.get(user__id=request.user.id)
     params={"euser":user,'feed':feed,'events':events[::-1][:3],'notices':notices[::-1][:3]}
     return render(request,'dashboard.html',params)
+
+def error404(request):
+    return render(request,'404-error.html')

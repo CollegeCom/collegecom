@@ -1,12 +1,13 @@
-from django.http.response import JsonResponse
 from accounts.models import extUser
 from django.shortcuts import redirect, render
-from django.contrib.auth.models import User
 from django.http import HttpResponse
 from .models import Comment, Feed
 from datetime import date
+from django.contrib.auth.decorators import login_required
 import time
 # Create your views here.
+
+@login_required(login_url='login')
 def addpost(request):
     if request.method=="POST":
         message=request.POST['message']
@@ -24,7 +25,8 @@ def addpost(request):
         af.save()
         success=str(af.image)
         return HttpResponse(success)
-
+        
+@login_required(login_url='login')
 def addcomment(request):
     if request.method=="POST":
         comment=request.POST['comment']

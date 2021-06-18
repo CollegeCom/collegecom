@@ -20,6 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
     path('',views.home,name="home"),
+    path('error-404',views.error404,name="error404"),
     path('admin/', admin.site.urls),
     path('',include('accounts.urls')),
     path('',include('feedback.urls')),

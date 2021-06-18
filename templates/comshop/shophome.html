@@ -82,11 +82,12 @@
 												<div class="card card-custom mb-12">
 													<div class="card-body rounded p-0 d-flex" style="background-color:#DAF0FD;">
 														<div class="d-flex flex-column flex-lg-row-auto w-auto w-lg-350px w-xl-450px w-xxl-500px p-10 p-md-20">
-															<h1 class="font-weight-bolder text-dark">Search Goods</h1>
+															<h1 class="font-weight-bolder text-dark">Search Itmes</h1>
 															<div class="font-size-h4 mb-8">Find your needs Easily</div>
 															<!--begin::Form-->
-															<form class="d-flex flex-center py-2 px-6 bg-white rounded">
-																<span class="svg-icon svg-icon-lg svg-icon-primary">
+															<form class="d-flex flex-center py-2 px-6 bg-white rounded" action="/shop/search" method="get">
+																<a type="submit">
+																  <span class="svg-icon svg-icon-lg svg-icon-primary">
 																	<!--begin::Svg Icon | path:/static/media/svg/icons/General/Search.svg-->
 																	<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 																		<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -97,7 +98,8 @@
 																	</svg>
 																	<!--end::Svg Icon-->
 																</span>
-																<input type="text" class="form-control border-0 font-weight-bold pl-2" placeholder="Search Item">
+																</a>
+																<input type="text" name="search" class="form-control border-0 font-weight-bold pl-2" placeholder="Search Item...">
 															</form>
 															<!--end::Form-->
 														</div>

@@ -1,3 +1,4 @@
+from django.db.models.query_utils import Q
 from accounts.models import extUser
 from comshop.models import Product
 from django.shortcuts import redirect, render
@@ -31,3 +32,9 @@ def addproduct(request):
         ap.save()
         return redirect('shop')
 
+def shopsearch(request):
+    if request.method=="GET":
+        search=request.GET['search']
+        products=Product.objects.filter(Q(category__icontains=search) | Q(title__icontains=search))
+        print(products)
+        return render(request,'comshop/shophome.html',{'products':products})

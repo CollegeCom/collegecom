@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render
 from chat.models import Messages
 from django.db.models.query_utils import Q
 from django.views.decorators.csrf import csrf_exempt
@@ -7,7 +7,9 @@ from rest_framework.parsers import JSONParser
 from chat.serializers import MessageSerializer
 from django.contrib.auth.models import User
 from accounts.models import extUser
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='login')
 def getUserId(username):
     """
     Get the user id by the username
@@ -17,7 +19,8 @@ def getUserId(username):
     use = User.objects.get(username=username)
     id = use.id
     return id
-
+    
+@login_required(login_url='login')
 def chat(request,username):
     """
     Get the chat between two users.
@@ -41,7 +44,8 @@ def chat(request,username):
                       {'messages': messages,
                        'curr_user': curr_user, 'friend': friend,'flag':flag ,'euser':muser,'fuser':fuser,'eusers':nuser})
 
-@csrf_exempt
+@csrf_exempt 
+@login_required(login_url='login')
 def message_list(request, sender=None, receiver=None):
     if request.method == 'GET':
         messages = Messages.objects.filter(sender_name=sender, receiver_name=receiver, seen=False)
@@ -59,12 +63,14 @@ def message_list(request, sender=None, receiver=None):
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
 
+@login_required(login_url='login')
 def chathome(request):
     flag=0
     euser=extUser.objects.exclude(user__id=request.user.id)
     params={'flag':flag,'eusers':euser}
     return render(request,'chats/chat.html',params)
 
+@login_required(login_url='login')
 def chatsearch(request):
     if request.method=="GET":
         flag=0
