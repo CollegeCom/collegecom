@@ -144,22 +144,18 @@
 														<form id="feed-form" class="form-group">{% csrf_token %}
 															<textarea class="form-control border-0 p-0 mt-4 mb-4" rows="2" name="message" placeholder="Type a message" id="msg_field" required></textarea>
 															<img class="rounded" id="image-show" style="width:40%;" > 
-															<div class="d-flex align-items-center justify-content-between mt-5 col-lg-6 pt-3" style="margin-bottom:-40px;">
+															<div class="d-flex align-items-center justify-content-between pt-3">
 																<div class="mr-3">
-																	<div class="image-input image-input-outline image-input-circle ml-9" style="margin-top:-20px;">
+																	<div class="image-input image-input-outline image-input-circle ml-9" >
 																		<label class="btn btn-xs btn-icon btn-white btn-hover-text-primary" data-action="change" data-toggle="tooltip" title="" data-original-title="Add Photo">
 																			<i class="flaticon2-photograph icon-lg"></i></i>
 																			<input type="file" id="post_image" accept=".png, .jpg, .jpeg" onchange="loadFile(event)">
 																		</label>															
 																	</div>
 																</div>
-																
-																
+																<button onclick="feedpost()" class="btn mt-9 btn-primary btn-md text-uppercase font-weight-bold py-2 px-6 float-right">Post</button>
 															</div>
 														</form>
-														<div class="col-lg-6 float-right ">
-														<button onclick="feedpost()" class="btn btn-primary btn-md text-uppercase font-weight-bold py-2 px-6 float-right">Post</button>
-														</div>
 														<!--end::Form-->
 													</div>
 													<!--end::Body-->
