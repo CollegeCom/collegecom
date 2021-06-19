@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from accounts.models import extUser
 from django.contrib.auth.decorators import login_required
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 def getUserId(username):
     """
     Get the user id by the username
