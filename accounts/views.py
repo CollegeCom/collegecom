@@ -57,6 +57,7 @@ def loginuser(request):
     if request.method=="POST":
         username = request.POST['username']
         password = request.POST['password']
+        username = username.split('@')[0]
         if User.objects.filter(username=username).exists():
             user = authenticate(username=username,password=password)
             if user is not None:

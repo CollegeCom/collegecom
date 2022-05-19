@@ -56,7 +56,7 @@ var KTLogin = function() {
 		        if (status == 'Valid') {
 					$.ajax({
 						type: "POST",
-						url: "/login-user",
+						url: "/login-user/",
 						data:{
 							username:$('#login-username').val(),
 							password:$('#login-password').val(),          
@@ -193,7 +193,7 @@ var KTLogin = function() {
 		        if (status == 'Valid') {
 					$.ajax({
 						type: "POST",
-						url: "/register-user",
+						url: "/register-user/",
 						data:{
 							first_name:$('#firstname').val(),
 							last_name:$('#lastname').val(),
