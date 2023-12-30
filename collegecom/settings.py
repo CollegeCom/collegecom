@@ -31,9 +31,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['https://collegecom.codeyaan.com', 'https://collegecom.in']
+ALLOWED_HOSTS = ['https://collegecom.codeyaan.com', 'https://collegecom.in', 'collegecom.codeyaan.com']
 
-CSRF_TRUSTED_ORIGINS = ['https://collegecom.codeyaan.com', 'https://collegecom.in']
+CSRF_TRUSTED_ORIGINS = ['https://collegecom.codeyaan.com', 'https://collegecom.in', 'collegecom.codeyaan.com']
 
 
 # Application definition
