@@ -12,6 +12,7 @@ ROLES = [
     ('Moderator', 'Moderator'),
 ]
 
+DEFAULT_PROFILE_IMAGE_PATH = 'profile_images/user.png'
 
 # Create your models here.
 class extUser(models.Model):  
@@ -27,7 +28,7 @@ class extUser(models.Model):
     department=models.CharField(max_length=100,default="IIST",blank=True)
     institution = models.CharField(max_length=255,blank=True,null=True)
     vbadge = models.BooleanField(default=False)
-    profileimg=models.ImageField(upload_to='profile_images/',default="profile_images/user.png")
+    profileimg=models.ImageField(upload_to='profile_images/',default=DEFAULT_PROFILE_IMAGE_PATH)
 
 
 

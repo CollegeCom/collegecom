@@ -1,3 +1,4 @@
+import os
 from django.db.models.query_utils import Q
 from django.shortcuts import render
 from django.contrib.auth.models import User
@@ -7,7 +8,7 @@ from accounts.models import extUser
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from feedback.models import Complaint,Feedback
-import os
+from accounts.services import remove_old_image
 
 # Create your views here.
 def login(request):
@@ -97,7 +98,7 @@ def updateprofile(request):
         try:
             profileimg=request.FILES['profileimg']
             oldimage=up.profileimg.path
-            os.remove(oldimage)
+            remove_old_image(oldimage)
             up.profileimg=profileimg
         except :
             pass
